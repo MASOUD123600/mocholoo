@@ -1,5 +1,5 @@
 rules_version = '2';
-// قوانین امنیتی گوگوجی — در کنسول Firebase › Firestore › Rules کپی و Publish شود
+// قوانین امنیتی موچولو — در کنسول Firebase › Firestore › Rules کپی و Publish شود
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
