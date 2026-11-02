@@ -43,10 +43,10 @@ export const PETS = ["گربه", "سگ", "سگ و گربه", "پرنده", "جو
 
 // شعبه‌ها — نشانی دقیق هر شعبه را وقتی آماده شد اینجا (یا از پنل) کامل کنید
 export const BRANCHES = [
-  { slug: "tajrish", name: "تجریش", city: "تهران", region: "شمال تهران", address: "تهران، تجریش", main: true },
+  { slug: "tajrish", name: "تجریش", city: "تهران", region: "شمال تهران", address: "تهران، میدان تجریش", main: true },
   { slug: "tehranpars", name: "تهرانپارس", city: "تهران", region: "شرق تهران", address: "تهران، تهرانپارس، قنات کوثر، بلوار مطهری، نبش کوچه دهم مرکزی، پلاک ۱۰۶ و ۴" },
-  { slug: "mehrshahr", name: "مهرشهر", city: "کرج", region: "کرج", address: "کرج، مهرشهر" },
-  { slug: "fardis", name: "فردیس", city: "کرج", region: "کرج", address: "کرج، فردیس" },
+  { slug: "mehrshahr", name: "مهرشهر", city: "کرج", region: "کرج", address: "کرج، مهرشهر، میدان مهرشهر" },
+  { slug: "fardis", name: "فردیس", city: "کرج", region: "کرج", address: "کرج، فردیس، فلکه اول" },
 ];
 
 export const THEMES = {
