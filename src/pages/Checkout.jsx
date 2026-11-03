@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { CreditCard, MessageCircle, Tag } from "lucide-react";
@@ -23,6 +23,7 @@ export default function Checkout() {
   const cardPay = S.cardPayEnabled !== false;
   const [method, setMethod] = useState(balePay ? "bale" : "card");
   const [busy, setBusy] = useState(false);
+  const placed = useRef(false); // بعد از ثبت سفارش، خالی شدن سبد نباید به /cart برگرداند
 
   useEffect(() => {
     if (!profile) return;
@@ -32,7 +33,7 @@ export default function Checkout() {
 
   if (user === null) return <Navigate to="/login?next=/checkout" replace />;
   if (user === undefined) return <div className="center-load"><Spinner /></div>;
-  if (!cartItems.length) return <Navigate to="/cart" replace />;
+  if (!cartItems.length && !placed.current) return <Navigate to="/cart" replace />;
 
   const referralFirstOrder = !!profile?.referredBy && !profile?.firstOrderDone;
   const t = computeTotals(cartItems, { settings: S, coupon, uid: user.uid, referralFirstOrder });
@@ -104,6 +105,7 @@ export default function Checkout() {
       ).catch(() => {});
       // اعلان سفارش جدید به بله مدیر (در صورت تنظیم سرور)
       fetch("/.netlify/functions/notify-order", { method: "POST", body: JSON.stringify({ orderId: ref.id }) }).catch(() => {});
+      placed.current = true;
       clearCart();
       notify(`سفارش ثبت شد — کد پیگیری: ${trackingCode}`);
       nav(`/order/${ref.id}`, { replace: true });

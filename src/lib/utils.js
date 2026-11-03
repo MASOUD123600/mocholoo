@@ -14,7 +14,7 @@ export const randomCode = (len = 8) => {
   crypto.getRandomValues(a);
   return Array.from(a, (x) => ALPHA[x % ALPHA.length]).join("");
 };
-export const genTrackingCode = () => "GGJ-" + randomCode(8);
+export const genTrackingCode = () => "MCH-" + randomCode(8);
 
 export const toDate = (t) => (t?.toDate ? t.toDate() : t ? new Date(t) : null);
 export const faDate = (t, withTime = false) => {
