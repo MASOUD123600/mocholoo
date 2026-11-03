@@ -24,7 +24,7 @@ async function sendInvoice(db, chatId, orderId) {
   const prices = [{ label: `سفارش ${order.trackingCode}`, amount: t.total * 10 }];
   return bale("sendInvoice", {
     chat_id: chatId,
-    title: `سفارش گوگوجی ${order.trackingCode}`.slice(0, 32),
+    title: `سفارش موچولو ${order.trackingCode}`.slice(0, 32),
     description: `${t.items.map((i) => `${i.name}×${i.qty}`).join("، ")}${t.discount ? ` | تخفیف ${fa(t.discount)}` : ""} | مبلغ ${fa(t.total)} تومان`.slice(0, 255),
     payload: order.id,
     provider_token: process.env.BALE_PROVIDER_TOKEN,
@@ -76,7 +76,7 @@ export const handler = async (event) => {
     if (text.startsWith("/start")) {
       const orderId = text.split(/\s+/)[1];
       if (orderId) await sendInvoice(db, chatId, orderId);
-      else await bale("sendMessage", { chat_id: chatId, text: `سلام! 🐾 به بازوی پرداخت پت شاپ گوگوجی خوش آمدید.\nبرای خرید به ${SITE} بروید.` });
+      else await bale("sendMessage", { chat_id: chatId, text: `سلام! 🐾 به بازوی پرداخت پت شاپ موچولو خوش آمدید.\nبرای خرید به ${SITE} بروید.` });
       return json(200, { ok: true });
     }
     // شناسه گفتگو برای تنظیم BALE_ADMIN_CHAT_ID

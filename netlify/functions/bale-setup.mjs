@@ -15,7 +15,7 @@ export const handler = async (event) => {
   }
   if (action === "test") {
     if (!process.env.BALE_ADMIN_CHAT_ID) return json(400, { error: "BALE_ADMIN_CHAT_ID تنظیم نشده (در بازو /id بفرستید)" });
-    const r = await notifyAdmin("✅ پیام آزمایشی از سایت گوگوجی — اعلان سفارش‌ها به همین گفتگو می‌آید.");
+    const r = await notifyAdmin("✅ پیام آزمایشی از سایت موچولو — اعلان سفارش‌ها به همین گفتگو می‌آید.");
     return r?.ok ? json(200, { message: "پیام آزمایشی ارسال شد" }) : json(502, { error: "ارسال پیام ناموفق بود" });
   }
   return json(400, { error: "action نامعتبر" });
