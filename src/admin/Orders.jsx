@@ -1,14 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { Phone, Printer, Search } from "lucide-react";
 import { db } from "../firebase";
 import { useApp } from "../store/AppContext";
 import { Img, Modal, Spinner } from "../components/ui";
-import { StatusBadge } from "../pages/Order";
+import { StatusBadge, Timeline } from "../pages/Order";
 import { ORDER_STATUSES } from "../config";
-import { confirmPayment, printInvoice } from "./actions";
+import { callFn, confirmPayment, printInvoice } from "./actions";
 import { faDate, fmt, telLink, toFa, waLink } from "../lib/utils";
+
+// دکمه «مرحله بعد» برای سفارش‌های پرداخت‌شده
+const NEXT_STEP = {
+  "پرداخت شده": { status: "در حال آماده‌سازی", label: "📦 شروع آماده‌سازی" },
+  "در حال آماده‌سازی": { status: "ارسال شده", label: "🚚 ارسال شد" },
+  "ارسال شده": { status: "تحویل داده شد", label: "🎉 تحویل داده شد" },
+};
+// اگر مشتری با بله‌پی پرداخت کرده، تغییر وضعیت در بله به او خبر داده می‌شود
+const tellCustomer = (orderId) => callFn("order-status", { orderId }).catch(() => null);
 
 function OrderDetail({ order, onClose }) {
   const { settings, notify, productMap } = useApp();
@@ -25,14 +34,17 @@ function OrderDetail({ order, onClose }) {
   const mismatch = (order.items || []).filter((i) => productMap[i.id] && Number(productMap[i.id].price) !== Number(i.price));
 
   const setStatus = async (status) => {
-    await updateDoc(doc(db, "orders", order.id), { status, adminSeen: true });
-    notify(`وضعیت: ${status}`);
+    await updateDoc(doc(db, "orders", order.id), { status, adminSeen: true, [`statusAt.${status}`]: serverTimestamp() });
+    const r = await tellCustomer(order.id);
+    notify(`وضعیت: ${status}${r?.sent ? " — به مشتری در بله خبر داده شد" : ""}`);
   };
+  const next = NEXT_STEP[order.status];
   const confirm = async () => {
     if (!window.confirm(`پرداخت ${fmt(order.total)} برای ${order.trackingCode} تأیید شود؟ موجودی محصولات کم می‌شود.`)) return;
     setBusy(true);
     try {
       const reward = await confirmPayment(order, settings);
+      tellCustomer(order.id);
       notify(`پرداخت تأیید شد ✅${reward ? ` — کد پاداش معرف: ${reward}` : ""}`);
     } catch (e) {
       console.error(e);
@@ -56,6 +68,12 @@ function OrderDetail({ order, onClose }) {
         <span className="muted small">{faDate(order.createdAt, true)} • روش پرداخت: {order.paymentMethod === "bale" ? "بله‌پی" : "کارت به کارت"}</span>
       </div>
       {order.payment?.refId && <div className="alert alert-ok">پرداخت آنلاین بله — شماره پیگیری: <b dir="ltr">{order.payment.refId}</b></div>}
+      <Timeline status={order.status} />
+      {next && (
+        <button className="btn btn-p btn-block" onClick={() => setStatus(next.status)}>
+          {next.label}
+        </button>
+      )}
 
       <div className="detail-grid">
         <div className="card soft">

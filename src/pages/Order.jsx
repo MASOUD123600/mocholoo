@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { doc, onSnapshot, serverTimestamp, updateDoc } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { Copy, ExternalLink, Upload } from "lucide-react";
@@ -37,10 +37,19 @@ export function Timeline({ status }) {
   );
 }
 
+// پیام صفحه سفارش در هر مرحله بعد از پرداخت
+const STAGE = {
+  "پرداخت شده": { icon: "🎉", title: "پرداخت با موفقیت انجام شد", text: "سفارشت ثبت شد و به‌زودی آماده‌سازی آن شروع می‌شود. وضعیت را همین‌جا دنبال کن." },
+  "در حال آماده‌سازی": { icon: "📦", title: "سفارشت در حال آماده‌سازی است", text: "داریم سفارشت را با دقت بسته‌بندی می‌کنیم؛ به‌زودی ارسال می‌شود." },
+  "ارسال شده": { icon: "🚚", title: "سفارشت ارسال شد", text: "بسته در راه است و به‌زودی به دستت می‌رسد." },
+  "تحویل داده شد": { icon: "🐾", title: "سفارشت تحویل داده شد", text: "ممنون که از موچولو خرید کردی! امیدواریم پشمالوت لذت ببره." },
+};
+
 const copy = (text, notify) => navigator.clipboard?.writeText(text).then(() => notify("کپی شد"));
 
 export default function Order() {
   const { id } = useParams();
+  const justPaid = useSearchParams()[0].get("paid") === "1"; // برگشت از بله بعد از پرداخت
   const { user, settings: S, notify } = useApp();
   const [order, setOrder] = useState(undefined);
   const [uploading, setUploading] = useState(false);
@@ -102,14 +111,19 @@ export default function Order() {
           </motion.div>
 
           {paid && (
-            <motion.div className="card success-card" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-              <div className="big-emoji">🎉</div>
-              <h2>پرداخت با موفقیت انجام شد</h2>
-              <p>سفارشت در صف آماده‌سازی قرار گرفت. وضعیت ارسال را همین‌جا یا در پنل کاربری دنبال کن.</p>
+            <motion.div key={order.status} className="card success-card" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+              <div className="big-emoji">{STAGE[order.status].icon}</div>
+              <h2>{STAGE[order.status].title}</h2>
+              <p>{STAGE[order.status].text}</p>
+              {order.paymentMethod === "bale" && order.status !== "تحویل داده شد" && <p className="muted small">هر مرحله در بازوی بله هم به شما خبر داده می‌شود.</p>}
             </motion.div>
           )}
 
-          {pending && (
+          {pending && justPaid && (
+            <div className="alert alert-ok"><Spinner /> پرداخت شما انجام شد؛ در حال ثبت نهایی… این صفحه خودکار به‌روز می‌شود.</div>
+          )}
+
+          {pending && !justPaid && (
             <div className="card">
               <h2 className="card-title">💳 پرداخت سفارش — {fmt(order.total)}</h2>
               {baleReady && order.paymentMethod !== "card" && (

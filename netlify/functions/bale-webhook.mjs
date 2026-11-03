@@ -1,5 +1,5 @@
 // وبهوک بازوی بله: صدور صورت‌حساب کیف پول، تأیید قبل از پرداخت و ثبت پرداخت موفق
-import { admin, bale, fa, json, markPaid, notifyAdmin, serverTotal } from "../lib/shared.mjs";
+import { admin, bale, fa, json, markPaid, serverTotal } from "../lib/shared.mjs";
 
 const SITE = process.env.SITE_URL || "https://mocholoo.ir";
 
@@ -63,11 +63,14 @@ export const handler = async (event) => {
       });
       await bale("sendMessage", {
         chat_id: chatId,
-        text: `🎉 پرداخت با موفقیت انجام شد!\n\nکد پیگیری سفارش: ${order.trackingCode}\nشماره پیگیری پرداخت: ${p.provider_payment_charge_id || "-"}\n\nسفارش شما در حال آماده‌سازی است.\nپیگیری: ${SITE}/order/${order.id}`,
+        text: `🎉 پرداخت با موفقیت انجام شد!\n\nکد پیگیری سفارش: ${order.trackingCode}\nشماره پیگیری پرداخت: ${p.provider_payment_charge_id || "-"}\n\nسفارش شما ثبت شد و به‌زودی آماده‌سازی آن شروع می‌شود. هر مرحله (آماده‌سازی، ارسال، تحویل) همین‌جا به شما خبر داده می‌شود.`,
+        reply_markup: { inline_keyboard: [[{ text: "🔎 بازگشت به سایت و پیگیری سفارش", url: `${SITE}/order/${order.id}?paid=1` }]] },
       });
-      await notifyAdmin(
-        `💰 پرداخت جدید (بله‌پی)\nکد پیگیری: ${order.trackingCode}\nمبلغ: ${fa(p.total_amount / 10)} تومان\nمشتری: ${order.customerInfo?.fullName} — ${order.customerInfo?.mobile}\nآدرس: ${order.customerInfo?.address}\nاقلام: ${(order.items || []).map((i) => `${i.name}×${i.qty}`).join("، ")}\nشماره پیگیری بانکی: ${p.provider_payment_charge_id || "-"}`,
-      );
+      await bale("sendMessage", {
+        chat_id: process.env.BALE_ADMIN_CHAT_ID,
+        text: `💰 پرداخت جدید (بله‌پی)\nکد پیگیری: ${order.trackingCode}\nمبلغ: ${fa(p.total_amount / 10)} تومان\nمشتری: ${order.customerInfo?.fullName} — ${order.customerInfo?.mobile}\nآدرس: ${order.customerInfo?.address}\nاقلام: ${(order.items || []).map((i) => `${i.name}×${i.qty}`).join("، ")}\nشماره پیگیری بانکی: ${p.provider_payment_charge_id || "-"}`,
+        reply_markup: { inline_keyboard: [[{ text: "📋 باز کردن در پنل مدیریت", url: `${SITE}/admin/orders?id=${order.id}` }]] },
+      });
       return json(200, { ok: true });
     }
 

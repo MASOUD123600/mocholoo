@@ -1,5 +1,5 @@
 import { arrayUnion, doc, getDoc, increment, serverTimestamp, writeBatch } from "firebase/firestore";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { randomCode } from "../lib/utils";
 
 /**
@@ -60,4 +60,13 @@ ${order.discount ? `<div class="row"><span>${order.discountLabel}</span><span>�
 <div class="box"><b>گیرنده:</b> ${c.fullName || ""} — ${c.mobile || ""}<br><b>آدرس:</b> ${c.province || ""}، ${c.city || ""}، ${c.address || ""}<br><b>کد پستی:</b> ${c.postalCode || ""}${c.notes ? `<br><b>توضیحات:</b> ${c.notes}` : ""}</div>
 <script>setTimeout(()=>print(),300)</script></body></html>`);
   w.document.close();
+}
+
+// صدا زدن توابع سرور Netlify با توکن مدیر
+export async function callFn(name, body) {
+  const token = await auth.currentUser.getIdToken();
+  const r = await fetch(`/.netlify/functions/${name}`, { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
+  return j;
 }

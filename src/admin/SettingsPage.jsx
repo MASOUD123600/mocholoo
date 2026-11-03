@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Save } from "lucide-react";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import { useApp } from "../store/AppContext";
 import { Spinner } from "../components/ui";
 import { THEMES } from "../config";
+import { callFn } from "./actions";
 
 // بیرون از کامپوننت اصلی تعریف شده تا با هر تایپ، فوکوس input از بین نرود (باگ نسخه ۴)
 function Field({ label, value, onChange, type = "text", full, ltr, hint, rows }) {
@@ -28,13 +29,6 @@ const Section = ({ title, children }) => (
   </section>
 );
 
-async function callFn(name, body) {
-  const token = await auth.currentUser.getIdToken();
-  const r = await fetch(`/.netlify/functions/${name}`, { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
-  return j;
-}
 
 export default function SettingsPage() {
   const { settings, notify } = useApp();
