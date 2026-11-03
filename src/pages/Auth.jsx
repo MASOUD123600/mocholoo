@@ -15,10 +15,12 @@ import { Seo, Spinner } from "../components/ui";
 import { isValidMobile, randomCode, storage, toEn } from "../lib/utils";
 import { ADMIN_ALIAS, ADMIN_EMAIL } from "../config";
 
-// نام کاربری: حروف انگلیسی کوچک، عدد، _ و نقطه؛ ۳ تا ۲۰ کاراکتر — در کالکشن usernames یکتا نگه داشته می‌شود
-export const normUsername = (u) => toEn(u).trim().toLowerCase();
+// نام کاربری: حروف انگلیسی کوچک، عدد، _ - و نقطه؛ ۳ تا ۲۰ کاراکتر — در کالکشن usernames یکتا نگه داشته می‌شود
+// فاصله‌ها خودکار به _ تبدیل می‌شوند (مثلاً «Abbas Malek» ← abbas_malek)
+export const normUsername = (u) => toEn(u).trim().toLowerCase().replace(/\s+/g, "_");
 export const usernameProblem = (u) => {
-  if (!/^[a-z0-9_.]{3,20}$/.test(u)) return "نام کاربری فقط حروف انگلیسی، عدد، _ و نقطه (۳ تا ۲۰ کاراکتر)";
+  if (/[^\x00-\x7f]/.test(u)) return "نام کاربری را با حروف انگلیسی بنویس (مثلاً abbas_malek)";
+  if (!/^[a-z0-9_.-]{3,20}$/.test(u)) return "نام کاربری فقط حروف انگلیسی، عدد، _ - و نقطه (۳ تا ۲۰ کاراکتر)";
   if (u === ADMIN_ALIAS.toLowerCase() || u === "admin") return "این نام کاربری رزرو شده است";
   return null;
 };
@@ -44,6 +46,9 @@ const ERR = {
   "auth/weak-password": "رمز عبور باید حداقل ۶ کاراکتر باشد",
   "auth/too-many-requests": "تلاش زیاد بود؛ چند دقیقه دیگر امتحان کن",
   "auth/network-request-failed": "اتصال اینترنت را بررسی کن",
+  "auth/internal-error": "ارتباط با سرور برقرار نشد؛ چند لحظه بعد دوباره امتحان کن",
+  "permission-denied": "ارتباط با سرور برقرار نشد؛ چند لحظه بعد دوباره امتحان کن",
+  unavailable: "ارتباط با سرور برقرار نشد؛ اینترنت را بررسی کن",
 };
 export const authError = (e) => ERR[e?.code] || "خطایی رخ داد؛ دوباره امتحان کن";
 
@@ -165,7 +170,7 @@ export function Register() {
       <Seo title="ثبت‌نام" noindex />
       <form onSubmit={submit} className="stack">
         <label className="field"><span>نام و نام خانوادگی</span><input value={f.name} onChange={set("name")} autoComplete="name" required /></label>
-        <label className="field"><span>نام کاربری (برای ورود؛ انگلیسی)</span><input dir="ltr" value={f.username} onChange={set("username")} placeholder="ali_pet" autoCapitalize="none" autoComplete="username" required /></label>
+        <label className="field"><span>نام کاربری (برای ورود؛ انگلیسی)</span><input dir="ltr" value={f.username} onChange={set("username")} placeholder="ali_pet" autoCapitalize="none" autoComplete="username" required /><small className="muted">فقط انگلیسی؛ فاصله خودکار به _ تبدیل می‌شود</small></label>
         <label className="field"><span>موبایل</span><input value={f.phone} onChange={set("phone")} inputMode="tel" placeholder="۰۹۱۲۱۲۳۴۵۶۷" autoComplete="tel" required /></label>
         <label className="field"><span>ایمیل</span><input type="email" dir="ltr" value={f.email} onChange={set("email")} autoComplete="email" required /></label>
         <label className="field"><span>رمز عبور</span><input type="password" dir="ltr" value={f.pass} onChange={set("pass")} autoComplete="new-password" placeholder="حداقل ۶ کاراکتر" required /></label>

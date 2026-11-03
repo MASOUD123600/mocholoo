@@ -10,6 +10,25 @@
   node_bundler = "esbuild"
   external_node_modules = ["firebase-admin"]
 
+# پروکسی Firebase برای کاربران ایران (گوگل آی‌پی ایران را مسدود می‌کند) — src/firebase.js
+[[redirects]]
+  from = "/__fs/*"
+  to = "https://firestore.googleapis.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/__id/*"
+  to = "https://identitytoolkit.googleapis.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/__tk/*"
+  to = "https://securetoken.googleapis.com/:splat"
+  status = 200
+  force = true
+
 # صفحات SPA (فایل‌های ساخته‌شده در dist مثل /p/slug اولویت دارند)
 [[redirects]]
   from = "/*"
