@@ -620,3 +620,20 @@ a.order-row:hover { border-color: var(--primary); background: var(--soft); }
 .faq-item > button h3 { font-size: 0.98rem; font-weight: 800; text-align: right; }
 @media (max-width: 960px) { .branches { grid-template-columns: repeat(2, 1fr); } .articles { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) { .branches, .articles { grid-template-columns: 1fr; } .branch-hero { flex-direction: column; align-items: flex-start; } .branch-art { display: none; } }
+
+/* ===== راهنماها و مجله (v1.7) ===== */
+.prose ul, .prose ol { margin: 0 0 14px; padding-inline-start: 22px; display: grid; gap: 6px; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: persian; }
+.prose li::marker { color: var(--primary); font-weight: 800; }
+.prose a { color: var(--primary); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.article section h2 { margin-top: 26px; }
+.answer-box { background: color-mix(in srgb, var(--primary) 9%, #fff); border-inline-start: 4px solid var(--primary); border-radius: 16px; padding: 14px 18px; margin: 14px 0 6px; }
+.answer-box b { display: block; color: var(--primary); margin-bottom: 4px; }
+.answer-box p { margin: 0; }
+.guide-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.guide-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; background: #fff; border-radius: 22px; padding: 22px 14px; box-shadow: var(--shadow); transition: transform 0.3s var(--ease); height: 100%; }
+.guide-card:hover { transform: translateY(-5px); }
+.guide-icon { font-size: 2.6rem; display: inline-block; }
+.guide-card b { font-weight: 900; line-height: 1.6; }
+@media (max-width: 960px) { .guide-cards { grid-template-columns: 1fr 1fr; } }

@@ -1,11 +1,12 @@
 // بعد از vite build: برای همه صفحه‌های عمومی یک HTML کامل (عنوان، توضیحات، canonical، OG، JSON-LD و متن اصلی) می‌سازد
 // تا گوگل و دستیارهای هوش مصنوعی بدون اجرای جاوااسکریپت هم کل محتوا را ببینند. React بعد از بارگذاری همین محتوا را نمایش می‌دهد.
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { BRAND, BRANCHES, CATEGORIES, SITE_URL } from "../src/config.js";
 import { SEED_PRODUCTS } from "../src/data/seedProducts.js";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd, fullTitle, productJsonLd, storeJsonLd } from "../src/lib/seoLd.js";
+import { CLUSTERS, TOPICS, blocks, inline } from "../src/lib/richText.js";
 
 const DIST = fileURLToPath(new URL("../dist/", import.meta.url));
 const SEO = JSON.parse(await readFile(new URL("../src/data/seo.json", import.meta.url), "utf8"));
@@ -13,6 +14,22 @@ const FIREBASE = JSON.parse(await readFile(new URL("../src/firebase.config.json"
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const paras = (t) => String(t || "").split(/\n+/).filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join("");
 const faqHtml = (items = []) => (items.length ? `<h2>سؤالات متداول</h2>${items.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join("")}` : "");
+// متن مقاله‌ها (فهرست، مراحل، لینک داخلی) — همان قالب صفحه React
+const line = (t) => inline(t).map((x) => (x.href ? `<a href="${esc(x.href)}">${esc(x.text)}</a>` : esc(x.text))).join("");
+const rich = (t) =>
+  blocks(t)
+    .map((b) => (b.type === "p" ? `<p>${line(b.text)}</p>` : `<${b.type}>${b.items.map((i) => `<li>${line(i)}</li>`).join("")}</${b.type}>`))
+    .join("");
+const readDir = async (sub) => {
+  const d = new URL(`../public/content/${sub}/`, import.meta.url);
+  const files = (await readdir(d)).filter((f) => f.endsWith(".json")).sort();
+  return Promise.all(files.map(async (f) => JSON.parse(await readFile(new URL(f, d), "utf8"))));
+};
+const ARTICLES = await readDir("articles");
+const GUIDES = await readDir("guides");
+const articleLinks = (list) => `<ul>${list.map((a) => `<li><a href="/blog/${a.slug}/">${esc(a.title)}</a> — ${esc(a.description)}</li>`).join("")}</ul>`;
+const guideLinks = `<ul>${GUIDES.map((g) => `<li><a href="/guide/${g.topic}/">${esc(g.h1)}</a></li>`).join("")}</ul>`;
+const contentBody = (x) => `${x.summary ? `<p><strong>پاسخ کوتاه:</strong> ${line(x.summary)}</p>` : ""}${(x.sections || []).map((s) => `<h2>${esc(s.h2)}</h2>${rich(s.body)}`).join("")}`;
 const crumbs = (trail) => `<nav>${trail.map(([n, p]) => `<a href="${p}">${esc(n)}</a>`).join(" / ")}</nav>`;
 
 function fromFirestore(v) {
@@ -61,7 +78,7 @@ function page({ title, description, path, image, jsonLd = [], body }) {
   if (image) html = html.replace(/<meta property="og:image"[^>]*>/, `<meta property="og:image" data-static content="${image.startsWith("http") ? image : SITE_URL + image}" />`);
   const ld = [].concat(jsonLd).filter(Boolean).map((j) => `<script type="application/ld+json" data-static>${JSON.stringify(j)}</script>`).join("\n    ");
   if (ld) html = html.replace("</head>", `    ${ld}\n  </head>`);
-  const nav = `<header><a href="/">${esc(BRAND.siteName)}</a> · <a href="/shop/">فروشگاه</a> · <a href="/branches/">شعبه‌ها</a> · <a href="/blog/">مجله</a> · <a href="/contact/">تماس: ۰۹۱۹۱۰۰۱۹۴۷</a></header>`;
+  const nav = `<header><a href="/">${esc(BRAND.siteName)}</a> · <a href="/shop/">فروشگاه</a> · <a href="/branches/">شعبه‌ها</a> · <a href="/guide/dog/">سگ</a> · <a href="/guide/cat/">گربه</a> · <a href="/guide/bird/">پرندگان</a> · <a href="/blog/">مجله</a> · <a href="/contact/">تماس: ۰۹۱۹۱۰۰۱۹۴۷</a></header>`;
   return html.replace('<div id="root"></div>', `<div id="root"><div class="prerender" style="max-width:960px;margin:24px auto;padding:16px;font-family:Tahoma,sans-serif;line-height:1.9">${nav}<main>${body}</main></div></div>`);
 }
 
@@ -93,7 +110,8 @@ await emit(
 <h2>برای گربه و سگ</h2><ul><li><a href="/pet/cat/">لوازم و غذای گربه</a></li><li><a href="/pet/dog/">لوازم و غذای سگ</a></li></ul>
 <h2>شعبه‌های ${esc(BRAND.name)}</h2>${branchList}
 <h2>محصولات</h2>${productList(products)}
-<h2>مجله ${esc(BRAND.name)}</h2><ul>${SEO.articles.map((a) => `<li><a href="/blog/${a.slug}/">${esc(a.title)}</a></li>`).join("")}</ul>
+<h2>راهنمای نگهداری حیوانات خانگی</h2>${guideLinks}
+<h2>مجله ${esc(BRAND.name)}</h2>${articleLinks(ARTICLES.slice(0, 30))}
 ${faqHtml(SEO.home.faq)}<p>اینستاگرام: <a href="https://www.instagram.com/${BRAND.instagram}/">@${BRAND.instagram}</a></p>`,
   },
   { priority: "1.0", changefreq: "daily" },
@@ -115,7 +133,7 @@ await emit(
 for (const c of SEO.categories) {
   const path = `/category/${c.slug}/`;
   const trail = [["خانه", "/"], ["فروشگاه", "/shop/"], [c.name, path]];
-  const related = SEO.articles.filter((a) => a.relatedCategory === c.name);
+  const related = ARTICLES.filter((a) => a.relatedCategory === c.slug);
   await emit(
     path,
     {
@@ -140,7 +158,7 @@ for (const pet of SEO.pets) {
       title: pet.title,
       description: pet.description,
       jsonLd: breadcrumbJsonLd(trail),
-      body: `${crumbs(trail)}<h1>${esc(pet.h1)}</h1>${productList(products.filter((p) => p.pet === pet.pet || p.pet === "سگ و گربه"))}${paras(pet.intro)}`,
+      body: `${crumbs(trail)}<h1>${esc(pet.h1)}</h1>${productList(products.filter((p) => p.pet === pet.pet || p.pet === "سگ و گربه"))}${paras(pet.intro)}<p><a href="/guide/${pet.slug}/">راهنمای کامل نگهداری ${esc(pet.pet)}</a></p>${articleLinks(ARTICLES.filter((a) => a.topic === pet.slug))}`,
     },
     { priority: "0.9", changefreq: "weekly" },
   );
@@ -178,17 +196,47 @@ for (const b of SEO.branches) {
 await emit(
   "/blog/",
   {
-    title: "مجله موچولو؛ راهنمای تغذیه و نگهداری سگ و گربه",
-    description: "مقاله‌های کاربردی درباره غذای گربه و سگ، شیرخشک بچه گربه، مکمل‌ها و بازی با حیوان خانگی؛ از تیم پت شاپ موچولو.",
+    title: "مجله موچولو؛ آموزش نگهداری سگ، گربه، پرنده و حیوانات خانگی",
+    description: "آموزش، تغذیه، سلامت و خرید سگ، گربه، مرغ عشق، طوطی، همستر و خرگوش؛ مقاله‌های کاربردی و دقیق از تیم پت شاپ موچولو.",
     jsonLd: breadcrumbJsonLd([["خانه", "/"], ["مجله", "/blog/"]]),
-    body: `<h1>مجله ${esc(BRAND.name)}: راهنمای نگهداری سگ و گربه</h1><ul>${SEO.articles.map((a) => `<li><a href="/blog/${a.slug}/">${esc(a.title)}</a> — ${esc(a.description)}</li>`).join("")}</ul>`,
+    body: `<h1>مجله ${esc(BRAND.name)}: راهنمای نگهداری حیوانات خانگی</h1>${guideLinks}${Object.entries(TOPICS)
+      .map(([t, info]) => `<h2>${esc(info.label)}</h2>${articleLinks(ARTICLES.filter((a) => a.topic === t))}`)
+      .join("")}`,
   },
-  { priority: "0.7", changefreq: "weekly" },
+  { priority: "0.8", changefreq: "weekly" },
 );
-for (const a of SEO.articles) {
+
+// راهنماهای اصلی (صفحات ستون: سگ، گربه، پرنده، حیوانات کوچک)
+for (const g of GUIDES) {
+  const info = TOPICS[g.topic];
+  const path = `/guide/${g.topic}/`;
+  const trail = [["خانه", "/"], ["مجله", "/blog/"], [info.name, path]];
+  const list = ARTICLES.filter((a) => a.topic === g.topic);
+  const groups = Object.entries(CLUSTERS)
+    .map(([c, name]) => [name, list.filter((a) => a.cluster === c)])
+    .filter(([, l]) => l.length)
+    .map(([name, l]) => `<h2>${esc(name)}</h2>${articleLinks(l)}`)
+    .join("");
+  await emit(
+    path,
+    {
+      title: g.title,
+      description: g.description,
+      jsonLd: [articleJsonLd(g, path), breadcrumbJsonLd(trail), faqJsonLd(g.faq)],
+      body: `${crumbs(trail)}<article><h1>${esc(g.h1)}</h1><p>${esc(g.author)} — ${esc(g.date)}</p>${contentBody(g)}${
+        g.topic === "dog" || g.topic === "cat" ? `<p><a href="/pet/${g.topic}/">خرید غذا و لوازم ${esc(info.name)}</a></p>` : ""
+      }${groups}${faqHtml(g.faq)}</article>`,
+    },
+    { priority: "0.9", changefreq: "weekly", lastmod: g.date },
+  );
+}
+
+for (const a of ARTICLES) {
   const path = `/blog/${a.slug}/`;
-  const trail = [["خانه", "/"], ["مجله", "/blog/"], [a.title, path]];
-  const cs = catSlug(a.relatedCategory);
+  const info = TOPICS[a.topic] || TOPICS.dog;
+  const trail = [["خانه", "/"], ["مجله", "/blog/"], [info.name, `/guide/${a.topic}/`], [a.title, path]];
+  const cat = CATEGORIES.find((c) => c.slug === a.relatedCategory);
+  const related = [...(a.related || []).map((r) => ARTICLES.find((x) => x.slug === r)).filter(Boolean), ...ARTICLES.filter((x) => x.topic === a.topic && x.slug !== a.slug)].slice(0, 4);
   await emit(
     path,
     {
@@ -196,9 +244,9 @@ for (const a of SEO.articles) {
       description: a.description,
       image: "/brand/europet-banner.webp",
       jsonLd: [articleJsonLd(a, path), breadcrumbJsonLd(trail), faqJsonLd(a.faq)],
-      body: `${crumbs(trail)}<article><h1>${esc(a.h1)}</h1><p>${esc(a.author)} — ${esc(a.date)}</p>${a.sections.map((s) => `<h2>${esc(s.h2)}</h2>${paras(s.body)}`).join("")}${
-        cs ? `<p>محصولات مرتبط: <a href="/category/${cs}/">${esc(a.relatedCategory)}</a></p>` : ""
-      }${faqHtml(a.faq)}</article>`,
+      body: `${crumbs(trail)}<article><h1>${esc(a.h1)}</h1><p>${esc(a.author)} — ${esc(a.date)}</p>${contentBody(a)}<p><a href="/guide/${a.topic}/">راهنمای کامل نگهداری ${esc(info.name)}</a>${
+        cat ? ` — محصولات مرتبط: <a href="/category/${cat.slug}/">${esc(cat.name)}</a>` : ""
+      }</p>${faqHtml(a.faq)}<h2>مقاله‌های مرتبط</h2>${articleLinks(related)}</article>`,
     },
     { priority: "0.7", lastmod: a.date },
   );

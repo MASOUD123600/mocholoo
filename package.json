@@ -4,8 +4,8 @@
   "version": "5.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "dev": "node scripts/build-content-index.mjs && vite",
+    "build": "node scripts/build-content-index.mjs && vite build && node scripts/prerender.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

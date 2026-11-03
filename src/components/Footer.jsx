@@ -36,6 +36,10 @@ export default function Footer() {
             <li><Link to="/about">درباره موچولو</Link></li>
             <li><Link to="/branches/">شعبه‌ها</Link></li>
             <li><Link to="/blog/">مجله موچولو</Link></li>
+            <li><Link to="/guide/dog/">نگهداری سگ</Link></li>
+            <li><Link to="/guide/cat/">نگهداری گربه</Link></li>
+            <li><Link to="/guide/bird/">پرندگان خانگی</Link></li>
+            <li><Link to="/guide/small-pets/">همستر و خرگوش</Link></li>
             <li><Link to="/faq">سؤالات متداول</Link></li>
             <li><Link to="/terms">قوانین و شرایط</Link></li>
             <li><Link to="/privacy">حریم خصوصی</Link></li>

@@ -7,7 +7,7 @@ import { Img, Reveal, Seo } from "../components/ui";
 import { ProductGrid, SkeletonGrid } from "../components/ProductCard";
 import { CATEGORIES, categoryUrl } from "../config";
 import SEO from "../data/seo.json";
-import { ArticleCards, BranchCards, FaqList, faqJsonLd, storeJsonLd } from "./SeoPages";
+import { ArticleCards, BranchCards, FaqList, GuideCards, faqJsonLd, storeJsonLd } from "./SeoPages";
 import { telLink, toFa } from "../lib/utils";
 
 const PAWS = Array.from({ length: 9 }, (_, i) => ({
@@ -218,7 +218,8 @@ export default function Home() {
       <ReferralBanner />
       <BranchCards />
       <HomeIntro />
-      <ArticleCards limit={3} />
+      <GuideCards />
+      <ArticleCards limit={6} />
     </>
   );
 }

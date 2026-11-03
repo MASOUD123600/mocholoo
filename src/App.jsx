@@ -16,7 +16,7 @@ import { Login, Register, ResetPassword } from "./pages/Auth";
 import Account from "./pages/Account";
 import { About, Contact, Faq, Terms, Privacy, NotFound } from "./pages/Static";
 import { storage } from "./lib/utils";
-import { ArticlePage, BlogPage, BranchPage, BranchesPage, CategoryPage, PetPage } from "./pages/SeoPages";
+import { ArticlePage, BlogPage, BranchPage, BranchesPage, CategoryPage, GuidePage, PetPage } from "./pages/SeoPages";
 
 const Admin = lazy(() => import("./admin/Admin"));
 
@@ -71,6 +71,7 @@ export default function App() {
           <Route path="/branch/:slug" element={p(<BranchPage />)} />
           <Route path="/blog" element={p(<BlogPage />)} />
           <Route path="/blog/:slug" element={p(<ArticlePage />)} />
+          <Route path="/guide/:topic" element={p(<GuidePage />)} />
           <Route path="/about" element={p(<About />)} />
           <Route path="/contact" element={p(<Contact />)} />
           <Route path="/faq" element={p(<Faq />)} />

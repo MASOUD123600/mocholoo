@@ -62,6 +62,8 @@ export default function Header() {
               </div>
             </div>
             <NavLink to="/branches/">شعبه‌ها</NavLink>
+            <NavLink to="/guide/dog/">سگ</NavLink>
+            <NavLink to="/guide/cat/">گربه</NavLink>
             <NavLink to="/blog/">مجله</NavLink>
             <NavLink to="/contact">تماس</NavLink>
           </nav>
@@ -121,6 +123,10 @@ export default function Header() {
                   <Link key={c.name} to={categoryUrl(c.name)}>{c.icon} {c.name}</Link>
                 ))}
                 <Link to="/branches/">📍 شعبه‌ها</Link>
+                <Link to="/guide/dog/">🐶 راهنمای نگهداری سگ</Link>
+                <Link to="/guide/cat/">🐱 راهنمای نگهداری گربه</Link>
+                <Link to="/guide/bird/">🦜 راهنمای پرندگان</Link>
+                <Link to="/guide/small-pets/">🐹 همستر، خرگوش و ...</Link>
                 <Link to="/blog/">📖 مجله موچولو</Link>
                 <Link to="/about">💚 درباره ما</Link>
                 <Link to="/contact">📞 تماس با ما</Link>
