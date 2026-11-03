@@ -16,6 +16,8 @@ import { Login, Register, ResetPassword } from "./pages/Auth";
 import Account from "./pages/Account";
 import { About, Contact, Faq, Terms, Privacy, NotFound } from "./pages/Static";
 import { storage } from "./lib/utils";
+import { trackView } from "./lib/track";
+import { useApp } from "./store/AppContext";
 import { ArticlePage, BlogPage, BranchPage, BranchesPage, CategoryPage, GuidePage, PetPage } from "./pages/SeoPages";
 
 const Admin = lazy(() => import("./admin/Admin"));
@@ -23,6 +25,9 @@ const Admin = lazy(() => import("./admin/Admin"));
 function ScrollTop() {
   const { pathname, search } = useLocation();
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [pathname]);
+  // آمار بازدید (پنل مدیریت › آمار بازدید)؛ بازدیدهای خود مدیر شمرده نمی‌شود
+  const { user, isAdmin } = useApp();
+  useEffect(() => { if (user !== undefined && !isAdmin) trackView(pathname); }, [pathname, user === undefined, isAdmin]); // eslint-disable-line react-hooks/exhaustive-deps
   // ذخیره کد معرف از لینک دعوت (?ref=CODE) برای ثبت‌نام بعدی
   useEffect(() => {
     const ref = new URLSearchParams(search).get("ref");

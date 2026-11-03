@@ -3,7 +3,7 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { collection, onSnapshot } from "firebase/firestore";
 import { sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bell, ExternalLink, LayoutDashboard, LogOut, Menu, Package, Receipt, Settings, Tag, Users } from "lucide-react";
+import { BarChart3, Bell, ExternalLink, LayoutDashboard, LogOut, Menu, Package, Receipt, Settings, Tag, Users } from "lucide-react";
 import { auth, db } from "../firebase";
 import { useApp } from "../store/AppContext";
 import { Logo, Seo, Spinner } from "../components/ui";
@@ -15,6 +15,7 @@ import Orders from "./Orders";
 import Products from "./Products";
 import { Coupons, Customers } from "./People";
 import SettingsPage from "./SettingsPage";
+import Stats from "./Stats";
 
 function AdminLogin() {
   const { user, notify } = useApp();
@@ -116,6 +117,7 @@ function AdminShell() {
   const askNotif = () => "Notification" in window && Notification.requestPermission().then((p) => notify(p === "granted" ? "اعلان مرورگر فعال شد" : "اجازه اعلان داده نشد", p === "granted" ? "ok" : "err"));
   const tabs = [
     ["", "داشبورد", LayoutDashboard, 0],
+    ["stats", "آمار بازدید", BarChart3, 0],
     ["orders", "سفارش‌ها", Receipt, unseen + toReview],
     ["products", "محصولات و قیمت‌ها", Package, 0],
     ["customers", "مشتری‌ها", Users, 0],
@@ -165,6 +167,7 @@ function AdminShell() {
               <Route path="customers" element={<Customers orders={orders} />} />
               <Route path="coupons" element={<Coupons />} />
               <Route path="settings" element={<SettingsPage />} />
+              <Route path="stats" element={<Stats />} />
             </Routes>
           )}
         </div>

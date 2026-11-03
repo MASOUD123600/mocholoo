@@ -637,3 +637,8 @@ a.order-row:hover { border-color: var(--primary); background: var(--soft); }
 .guide-icon { font-size: 2.6rem; display: inline-block; }
 .guide-card b { font-weight: 900; line-height: 1.6; }
 @media (max-width: 960px) { .guide-cards { grid-template-columns: 1fr 1fr; } }
+
+/* ===== آمار بازدید (v1.8) ===== */
+.rank-row { margin-bottom: 10px; }
+.rank-bar { height: 6px; border-radius: 6px; background: color-mix(in srgb, var(--primary) 12%, #fff); overflow: hidden; margin-top: 4px; }
+.rank-bar span { display: block; height: 100%; border-radius: 6px; background: var(--primary); }
