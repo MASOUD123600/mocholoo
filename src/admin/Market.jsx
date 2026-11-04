@@ -115,7 +115,7 @@ export default function Market() {
     <div className="stack">
       <div className="card soft">
         <h3 className="card-title">📊 قیمت بازار <small>(بررسی‌شده در {new Date(MARKET.checkedAt).toLocaleDateString("fa-IR")})</small></h3>
-        <p className="muted small">قیمت‌ها همان قیمت فروش دیجی‌کالا در روز بررسی است. «کالای مشابه» یعنی دقیقاً همان مدل پیدا نشد و قیمت نزدیک‌ترین کالای هم‌نوع آمده؛ آن‌ها را یک بار چک کنید.</p>
+        <p className="muted small">قیمت‌ها قیمت اصلی دیجی‌کالا (بدون تخفیف فروشنده) در روز بررسی است و وزن هر محصول با عکس خود محصول در سایت تطبیق داده شده. «کالای مشابه» یعنی دقیقاً همان مدل پیدا نشد و قیمت نزدیک‌ترین کالای هم‌نوع آمده؛ آن‌ها را یک بار چک کنید.</p>
         <div className="row-gap wrap">
           <button className="btn btn-p" onClick={applyPrices} disabled={!!busy || !pending.length}>
             {busy === "prices" ? <Spinner /> : <><RefreshCw size={16} /> اعمال قیمت بازار روی {toFa(pending.length)} محصول فعلی</>}
