@@ -642,3 +642,9 @@ a.order-row:hover { border-color: var(--primary); background: var(--soft); }
 .rank-row { margin-bottom: 10px; }
 .rank-bar { height: 6px; border-radius: 6px; background: color-mix(in srgb, var(--primary) 12%, #fff); overflow: hidden; margin-top: 4px; }
 .rank-bar span { display: block; height: 100%; border-radius: 6px; background: var(--primary); }
+
+/* ===== تغییر گروهی قیمت (v1.9) ===== */
+.bulk-price { display: grid; gap: 12px; }
+.bulk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bulk-preview { display: grid; gap: 6px; background: #fff; border-radius: 14px; padding: 10px 14px; }
+@media (max-width: 640px) { .bulk-row { grid-template-columns: 1fr; } }

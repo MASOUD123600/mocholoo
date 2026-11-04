@@ -5,6 +5,7 @@ import { db } from "../firebase";
 import { useApp } from "../store/AppContext";
 import { Img, Modal, Spinner } from "../components/ui";
 import { SEED_PRODUCTS } from "../data/seedProducts";
+import BulkPrice from "./BulkPrice";
 import { CATEGORIES, PETS } from "../config";
 import { compressImage, fmtNum, num, slugify, toFa } from "../lib/utils";
 
@@ -185,6 +186,7 @@ export default function Products() {
         <label className="check"><input type="checkbox" checked={onlyNoPrice} onChange={(e) => setOnlyNoPrice(e.target.checked)} /> فقط بدون قیمت</label>
         <button className="btn btn-p" onClick={() => setEditing({})}><Plus size={17} /> محصول جدید</button>
       </div>
+      <BulkPrice list={list} filtered={!!(q || cat || onlyNoPrice)} />
       <p className="muted small">💡 قیمت و موجودی را مستقیم در جدول تغییر بده و در آخر «ذخیره تغییرات» را بزن. برای عکس و توضیحات، دکمه ویرایش ✏️.</p>
       <div className="card table-card">
         <table className="table products-table">
