@@ -3,7 +3,7 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { collection, onSnapshot } from "firebase/firestore";
 import { sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";
-import { BarChart3, Bell, ExternalLink, LayoutDashboard, LogOut, Menu, Package, Receipt, Settings, Tag, Users } from "lucide-react";
+import { BarChart3, Bell, Factory, ExternalLink, LayoutDashboard, LogOut, Menu, Package, Receipt, Settings, Tag, Users } from "lucide-react";
 import { auth, db } from "../firebase";
 import { useApp } from "../store/AppContext";
 import { Logo, Seo, Spinner } from "../components/ui";
@@ -16,6 +16,7 @@ import Products from "./Products";
 import { Coupons, Customers } from "./People";
 import SettingsPage from "./SettingsPage";
 import Stats from "./Stats";
+import Market from "./Market";
 
 function AdminLogin() {
   const { user, notify } = useApp();
@@ -120,6 +121,7 @@ function AdminShell() {
     ["stats", "آمار بازدید", BarChart3, 0],
     ["orders", "سفارش‌ها", Receipt, unseen + toReview],
     ["products", "محصولات و قیمت‌ها", Package, 0],
+    ["market", "قیمت بازار و تأمین‌کننده", Factory, 0],
     ["customers", "مشتری‌ها", Users, 0],
     ["coupons", "کد تخفیف", Tag, 0],
     ["settings", "تنظیمات سایت", Settings, 0],
@@ -168,6 +170,7 @@ function AdminShell() {
               <Route path="coupons" element={<Coupons />} />
               <Route path="settings" element={<SettingsPage />} />
               <Route path="stats" element={<Stats />} />
+              <Route path="market" element={<Market />} />
             </Routes>
           )}
         </div>
