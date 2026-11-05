@@ -44,7 +44,7 @@ export const storeJsonLd = (phone = "09191001947") => ({
       sameAs: [`https://www.instagram.com/${BRAND.instagram}/`],
       contactPoint: { "@type": "ContactPoint", telephone: intlPhone(phone), contactType: "customer service", areaServed: ["تهران", "کرج"], availableLanguage: "fa" },
     },
-    { "@type": "WebSite", "@id": `${SITE_URL}/#site`, name: BRAND.siteName, alternateName: BRAND.name, url: `${SITE_URL}/`, inLanguage: "fa-IR", publisher: { "@id": `${SITE_URL}/#org` } },
+    { "@type": "WebSite", "@id": `${SITE_URL}/#site`, name: BRAND.siteName, alternateName: [BRAND.name, "Mocholoo", "موچولو پت"], url: `${SITE_URL}/`, inLanguage: "fa-IR", publisher: { "@id": `${SITE_URL}/#org` } },
     ...BRANCHES.map((b) => branchLd(b, phone)),
   ],
 });
