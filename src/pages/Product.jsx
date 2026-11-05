@@ -8,6 +8,8 @@ import ProductCard from "../components/ProductCard";
 import { SITE_URL, categoryUrl } from "../config";
 import { breadcrumbJsonLd, productJsonLd } from "../lib/seoLd";
 import { fmt, telLink, toFa, waLink } from "../lib/utils";
+import { productGuide, productTitle } from "../lib/productGuide";
+import CONTENT from "../data/contentIndex.json";
 
 function Gallery({ images, name }) {
   const [i, setI] = useState(0);
@@ -65,6 +67,8 @@ export default function Product() {
   const out = priced && Number(p.stock) < 1;
   const off = priced && Number(p.comparePrice) > Number(p.price) ? Math.round((1 - p.price / p.comparePrice) * 100) : 0;
   const related = visibleProducts.filter((x) => x.id !== p.id && (x.category === p.category || x.pet === p.pet)).slice(0, 4);
+  const guide = productGuide(p);
+  const guideLinks = guide.slugs.map((s) => CONTENT.articles.find((a) => a.slug === s)).filter(Boolean);
   const url = `/p/${p.slug || p.id}`;
   const absImg = firstImg?.startsWith("/") ? SITE_URL + firstImg : undefined;
 
@@ -81,7 +85,7 @@ export default function Product() {
 
   return (
     <div className="container section">
-      <Seo title={p.name} description={`خرید ${p.name} اصل از پت شاپ موچولو. ${p.desc}`.slice(0, 160)} path={`${url}/`} image={absImg} jsonLd={jsonLd} />
+      <Seo title={productTitle(p)} description={`خرید ${p.name} اصل از پت شاپ موچولو. ${p.desc}`.slice(0, 160)} path={`${url}/`} image={absImg} jsonLd={jsonLd} />
       <nav className="crumbs">
         <Link to="/">خانه</Link> / <Link to="/shop">فروشگاه</Link> / <Link to={categoryUrl(p.category)}>{p.category}</Link> / <span>{p.name}</span>
       </nav>
@@ -141,6 +145,22 @@ export default function Product() {
           </div>
         </motion.div>
       </div>
+
+      {(guide.tips.length > 0 || guide.perKg > 0) && (
+        <section className="section">
+          <div className="sec-head"><h2>راهنمای <span>خرید و استفاده</span></h2></div>
+          <div className="card soft product-guide">
+            {guide.perKg > 0 && <p><b>قیمت هر کیلو:</b> حدود {fmt(guide.perKg)}</p>}
+            {guide.tips.length > 0 && <ul>{guide.tips.map((t) => <li key={t}>{t}</li>)}</ul>}
+            {guideLinks.length > 0 && (
+              <>
+                <h3>مطالب مفید پیش از خرید</h3>
+                <ul>{guideLinks.map((a) => <li key={a.slug}><Link to={`/blog/${a.slug}/`}>{a.title}</Link></li>)}</ul>
+              </>
+            )}
+          </div>
+        </section>
+      )}
 
       {related.length > 0 && (
         <section className="section">

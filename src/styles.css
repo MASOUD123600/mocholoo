@@ -650,3 +650,10 @@ a.order-row:hover { border-color: var(--primary); background: var(--soft); }
 @media (max-width: 640px) { .bulk-row { grid-template-columns: 1fr; } }
 .cell-input.wide { min-width: 150px; }
 .row-gap.wrap { flex-wrap: wrap; }
+
+/* راهنمای صفحه محصول */
+.product-guide { padding: 16px 18px; line-height: 1.95; }
+.product-guide ul { margin: 8px 0; padding-inline-start: 20px; }
+.product-guide li { list-style: disc; margin-bottom: 4px; }
+.product-guide h3 { margin: 14px 0 4px; font-size: 1rem; }
+.product-guide a { color: var(--primary, #118a8c); text-decoration: underline; }

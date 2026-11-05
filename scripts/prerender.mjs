@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { BRAND, BRANCHES, CATEGORIES, SITE_URL } from "../src/config.js";
 import { SEED_PRODUCTS } from "../src/data/seedProducts.js";
+import { productGuide, productTitle } from "../src/lib/productGuide.js";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd, fullTitle, productJsonLd, storeJsonLd } from "../src/lib/seoLd.js";
 import { CLUSTERS, TOPICS, blocks, inline } from "../src/lib/richText.js";
 
@@ -65,7 +66,7 @@ const template = await readFile(join(DIST, "index.html"), "utf8");
 // قالب خالی برای مسیرهای خصوصی SPA (پنل، سبد، حساب) — netlify.toml به این فایل redirect می‌کند
 await writeFile(join(DIST, "app.html"), template.replace("<head>", '<head>\n    <meta name="robots" content="noindex" />'));
 
-function page({ title, description, path, image, jsonLd = [], body }) {
+function page({ title, description, path, image, jsonLd = [], body, ogType }) {
   const full = fullTitle(title, SEO.home.title);
   const url = SITE_URL + path;
   let html = template
@@ -75,6 +76,7 @@ function page({ title, description, path, image, jsonLd = [], body }) {
     .replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" data-static content="${esc(full)}" />`)
     .replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" data-static content="${esc(description)}" />`)
     .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" data-static content="${url}" />`);
+  if (ogType) html = html.replace(/<meta property="og:type"[^>]*>/, `<meta property="og:type" data-static content="${ogType}" />`);
   if (image) html = html.replace(/<meta property="og:image"[^>]*>/, `<meta property="og:image" data-static content="${image.startsWith("http") ? image : SITE_URL + image}" />`);
   const ld = [].concat(jsonLd).filter(Boolean).map((j) => `<script type="application/ld+json" data-static>${JSON.stringify(j)}</script>`).join("\n    ");
   if (ld) html = html.replace("</head>", `    ${ld}\n  </head>`);
@@ -243,12 +245,13 @@ for (const a of ARTICLES) {
       title: a.title,
       description: a.description,
       image: "/brand/europet-banner.webp",
+      ogType: "article",
       jsonLd: [articleJsonLd(a, path), breadcrumbJsonLd(trail), faqJsonLd(a.faq)],
       body: `${crumbs(trail)}<article><h1>${esc(a.h1)}</h1><p>${esc(a.author)} — ${esc(a.date)}</p>${contentBody(a)}<p><a href="/guide/${a.topic}/">راهنمای کامل نگهداری ${esc(info.name)}</a>${
         cat ? ` — محصولات مرتبط: <a href="/category/${cat.slug}/">${esc(cat.name)}</a>` : ""
       }</p>${faqHtml(a.faq)}<h2>مقاله‌های مرتبط</h2>${articleLinks(related)}</article>`,
     },
-    { priority: "0.7", lastmod: a.date },
+    { priority: "0.7", lastmod: a.updated || a.date },
   );
 }
 
@@ -259,16 +262,23 @@ for (const p of products) {
   const image = img && img.startsWith("/") ? img : undefined;
   const cs = catSlug(p.category);
   const trail = [["خانه", "/"], ["فروشگاه", "/shop/"], [p.category, cs ? `/category/${cs}/` : "/shop/"], [p.name, path]];
+  const guide = productGuide(p);
+  const guideLinks = guide.slugs.map((s) => ARTICLES.find((a) => a.slug === s)).filter(Boolean);
+  const sameKind = products.filter((x) => x.id !== p.id && (x.category === p.category || x.pet === p.pet)).slice(0, 4);
   await emit(
     path,
     {
-      title: p.name,
+      title: productTitle(p),
       description: `خرید ${p.name} اصل از پت شاپ موچولو. ${p.desc}`.slice(0, 160),
       image,
       jsonLd: [productJsonLd(p, image), breadcrumbJsonLd(trail)],
       body: `${crumbs(trail)}<h1>${esc(p.name)}</h1>${image ? `<img src="${image}" alt="${esc(p.name)}" width="420">` : ""}<p>${esc(p.desc)}</p><ul>${(p.features || []).map((f) => `<li>${esc(f)}</li>`).join("")}</ul>${
         Number(p.price) > 0 ? `<p>قیمت: ${Number(p.price).toLocaleString("fa-IR")} تومان</p>` : "<p>برای استعلام قیمت با ۰۹۱۹۱۰۰۱۹۴۷ تماس بگیرید.</p>"
-      }<p>برند: ${esc(p.brand || "-")} — مناسب: ${esc(p.pet)}</p>`,
+      }<p>برند: ${esc(p.brand || "-")} — مناسب: ${esc(p.pet)}</p>${
+        guide.tips.length || guide.perKg
+          ? `<h2>راهنمای خرید و استفاده</h2>${guide.perKg ? `<p>قیمت هر کیلو: حدود ${guide.perKg.toLocaleString("fa-IR")} تومان</p>` : ""}<ul>${guide.tips.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`
+          : ""
+      }${guideLinks.length ? `<h3>مطالب مفید پیش از خرید</h3>${articleLinks(guideLinks)}` : ""}${sameKind.length ? `<h2>محصولات مرتبط</h2>${productList(sameKind)}` : ""}`,
     },
     { priority: "0.8", images: (p.images || []).filter((x) => x.startsWith("/")), title: p.name },
   );

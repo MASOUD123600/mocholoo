@@ -10,7 +10,7 @@ const readAll = async (p) => {
 
 const articles = (await readAll("articles"))
   .map(({ slug, topic, cluster, title, description, date, relatedCategory, readMinutes }) => ({ slug, topic, cluster, title, description, date, relatedCategory, readMinutes }))
-  .sort((a, b) => a.slug.localeCompare(b.slug));
+  .sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.slug.localeCompare(b.slug));
 const guides = (await readAll("guides")).map(({ topic, title, description, h1 }) => ({ topic, title, description, h1 }));
 
 await writeFile(new URL("../src/data/contentIndex.json", import.meta.url), JSON.stringify({ articles, guides }));

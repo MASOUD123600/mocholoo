@@ -55,7 +55,7 @@ export const articleJsonLd = (a, path) => ({
   headline: a.title,
   description: a.description,
   datePublished: a.date,
-  dateModified: a.date,
+  dateModified: a.updated || a.date,
   inLanguage: "fa-IR",
   image: `${SITE_URL}/brand/europet-banner.webp`,
   author: { "@type": "Organization", name: a.author || "تیم موچولو", url: `${SITE_URL}/about` },
