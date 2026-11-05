@@ -69,6 +69,8 @@ export default function Market() {
   const byId = useMemo(() => Object.fromEntries(products.map((p) => [p.id, p])), [products]);
   const pending = MARKET.updates.filter((u) => byId[u.id] && Number(byId[u.id].price) !== u.price);
   const missing = MARKET.newProducts.filter((p) => !byId[p.id]);
+  // محصولاتی که با قیمت تخفیف‌خورده قدیمی ثبت و بعد ۵٪ گران شده‌اند
+  const wrongBase = MARKET.newProducts.filter((p) => byId[p.id]?.bulkId && Math.abs(Number(byId[p.id].prevPrice) - Number(p.price)) > 1);
   const rows = products.filter((p) => !q || `${p.name} ${p.brand} ${saved?.[p.id]?.seller || ""}`.includes(q));
 
   const applyPrices = async () => {
@@ -101,6 +103,22 @@ export default function Market() {
     setBusy("");
   };
 
+  const fixBase = async () => {
+    if (!window.confirm(`قیمت ${toFa(wrongBase.length)} محصول به قیمت بدون تخفیف به‌علاوه ۵٪ اصلاح شود؟`)) return;
+    setBusy("fix");
+    try {
+      await commitInChunks(wrongBase, (b, p) =>
+        b.update(doc(db, "products", p.id), { price: Math.round((Number(p.price) * 1.05) / 1000) * 1000, comparePrice: 0, prevPrice: Number(p.price), updatedAt: serverTimestamp() }),
+      );
+      await saveSuppliers(saved, wrongBase.map((p) => p.id));
+      notify(`قیمت ${toFa(wrongBase.length)} محصول اصلاح شد ✅`);
+    } catch (e) {
+      console.error(e);
+      notify("اصلاح قیمت‌ها ناموفق بود", "err");
+    }
+    setBusy("");
+  };
+
   const saveRow = async (id, f) => {
     try {
       await setDoc(SUP_DOC, { map: { [id]: { ...(saved[id] || MARKET.suppliers[id] || {}), ...f, buyPrice: Number(String(f.buyPrice).replace(/\D/g, "")) || "", sellerEdited: true } } }, { merge: true });
@@ -123,6 +141,11 @@ export default function Market() {
           <button className="btn btn-p" onClick={addNew} disabled={!!busy || !missing.length}>
             {busy === "new" ? <Spinner /> : <><PackagePlus size={16} /> افزودن {toFa(missing.length)} محصول جدید</>}
           </button>
+          {wrongBase.length > 0 && (
+            <button className="btn btn-p" onClick={fixBase} disabled={!!busy}>
+              {busy === "fix" ? <Spinner /> : <><RefreshCw size={16} /> اصلاح قیمت {toFa(wrongBase.length)} محصول (بدون تخفیف + ۵٪)</>}
+            </button>
+          )}
         </div>
         {pending.length > 0 && (
           <details>
