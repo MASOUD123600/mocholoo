@@ -65,6 +65,7 @@ export const articleJsonLd = (a, path) => ({
 
 export const productJsonLd = (p, image) => {
   const priced = Number(p.price) > 0;
+  if (!priced) return null; // گوگل Product بدون offers را خطا می‌گیرد
   const url = `${SITE_URL}/p/${p.slug || p.id}/`;
   return {
     "@context": "https://schema.org",
