@@ -8,9 +8,11 @@ import { SEED_PRODUCTS } from "../src/data/seedProducts.js";
 import { productGuide, productTitle } from "../src/lib/productGuide.js";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd, fullTitle, productJsonLd, storeJsonLd } from "../src/lib/seoLd.js";
 import { CLUSTERS, TOPICS, blocks, inline } from "../src/lib/richText.js";
+import { PET_SLUGS, brandOf, brandPath, brandProducts, itemListLd, petCatPath, petCatProducts, priceRange } from "../src/lib/landing.js";
 
 const DIST = fileURLToPath(new URL("../dist/", import.meta.url));
 const SEO = JSON.parse(await readFile(new URL("../src/data/seo.json", import.meta.url), "utf8"));
+const LANDING = JSON.parse(await readFile(new URL("../src/data/landing.json", import.meta.url), "utf8"));
 const FIREBASE = JSON.parse(await readFile(new URL("../src/firebase.config.json", import.meta.url), "utf8"));
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const paras = (t) => String(t || "").split(/\n+/).filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join("");
@@ -98,6 +100,13 @@ const productList = (list) =>
   `<ul>${list.map((p) => `<li><a href="${pUrl(p)}">${esc(p.name)}</a>${Number(p.price) > 0 ? ` — ${Number(p.price).toLocaleString("fa-IR")} تومان` : ""}</li>`).join("")}</ul>`;
 const catSlug = (name) => CATEGORIES.find((c) => c.name === name)?.slug;
 const neshanLink = (b) => (b.neshan ? ` — <a href="${b.neshan}" target="_blank" rel="noopener">مسیریابی شعبه ${esc(b.name)} در نشان</a>` : "");
+const fa = (n) => Number(n).toLocaleString("fa-IR");
+const priceLine = (list, label) => {
+  const r = priceRange(list);
+  return r ? `<p>${esc(label)}: ${fa(list.length)} محصول، قیمت از ${fa(r.min)}${r.max > r.min ? ` تا ${fa(r.max)}` : ""} تومان.</p>` : "";
+};
+const petCatLinks = (list) => `<ul>${list.map((x) => `<li><a href="${petCatPath(x)}">${esc(x.h1)}</a></li>`).join("")}</ul>`;
+const brandLinks = (list) => `<ul>${list.map((b) => `<li><a href="${brandPath(b)}">${esc(b.name)} (${esc(b.latin)})</a></li>`).join("")}</ul>`;
 const branchList = `<ul>${BRANCHES.map((b) => `<li><a href="/branch/${b.slug}/">پت شاپ موچولو شعبه ${b.num} (${esc(b.name)})</a> — ${esc(b.address)}${neshanLink(b)}</li>`).join("")}</ul>`;
 
 // صفحه اصلی
@@ -110,7 +119,8 @@ await emit(
     jsonLd: [storeJsonLd(), faqJsonLd(SEO.home.faq)],
     body: `<h1>${esc(SEO.home.h1)}</h1>${paras(SEO.home.intro)}
 <h2>دسته‌بندی محصولات</h2><ul>${CATEGORIES.map((c) => `<li><a href="/category/${c.slug}/">${esc(c.name)}</a></li>`).join("")}</ul>
-<h2>برای گربه و سگ</h2><ul><li><a href="/pet/cat/">لوازم و غذای گربه</a></li><li><a href="/pet/dog/">لوازم و غذای سگ</a></li></ul>
+<h2>برای گربه و سگ</h2><ul><li><a href="/pet/cat/">لوازم و غذای گربه</a></li><li><a href="/pet/dog/">لوازم و غذای سگ</a></li></ul>${petCatLinks(LANDING.petCategories)}
+<h2>برندها</h2>${brandLinks(LANDING.brands)}
 <h2>شعبه‌های ${esc(BRAND.name)}</h2>${branchList}
 <h2>محصولات</h2>${productList(products)}
 <h2>راهنمای نگهداری حیوانات خانگی</h2>${guideLinks}
@@ -143,7 +153,7 @@ for (const c of SEO.categories) {
       title: c.title,
       description: c.description,
       jsonLd: [breadcrumbJsonLd(trail), faqJsonLd(c.faq)],
-      body: `${crumbs(trail)}<h1>${esc(c.h1)}</h1>${productList(products.filter((p) => p.category === c.name))}${paras(c.intro)}${
+      body: `${crumbs(trail)}<h1>${esc(c.h1)}</h1>${petCatLinks(LANDING.petCategories.filter((x) => x.cat === c.slug))}${productList(products.filter((p) => p.category === c.name))}${paras(c.intro)}${
         related.length ? `<h2>راهنمای خرید</h2><ul>${related.map((a) => `<li><a href="/blog/${a.slug}/">${esc(a.title)}</a></li>`).join("")}</ul>` : ""
       }${faqHtml(c.faq)}`,
     },
@@ -161,9 +171,61 @@ for (const pet of SEO.pets) {
       title: pet.title,
       description: pet.description,
       jsonLd: breadcrumbJsonLd(trail),
-      body: `${crumbs(trail)}<h1>${esc(pet.h1)}</h1>${productList(products.filter((p) => p.pet === pet.pet || p.pet === "سگ و گربه"))}${paras(pet.intro)}<p><a href="/guide/${pet.slug}/">راهنمای کامل نگهداری ${esc(pet.pet)}</a></p>${articleLinks(ARTICLES.filter((a) => a.topic === pet.slug))}`,
+      body: `${crumbs(trail)}<h1>${esc(pet.h1)}</h1>${petCatLinks(LANDING.petCategories.filter((x) => x.pet === pet.slug))}${productList(products.filter((p) => p.pet === pet.pet || p.pet === "سگ و گربه"))}${paras(pet.intro)}<p><a href="/guide/${pet.slug}/">راهنمای کامل نگهداری ${esc(pet.pet)}</a></p>${articleLinks(ARTICLES.filter((a) => a.topic === pet.slug))}`,
     },
     { priority: "0.9", changefreq: "weekly" },
+  );
+}
+
+// دسته + حیوان (غذای خشک گربه، تشویقی سگ، ...)
+for (const pc of LANDING.petCategories) {
+  const cat = CATEGORIES.find((c) => c.slug === pc.cat);
+  const path = petCatPath(pc);
+  const trail = [["خانه", "/"], ["فروشگاه", "/shop/"], [cat.name, `/category/${cat.slug}/`], [pc.h1, path]];
+  const list = petCatProducts(products, cat.name, pc.pet);
+  const brands = LANDING.brands.filter((b) => list.some((p) => brandOf(p, LANDING.brands)?.slug === b.slug));
+  const arts = ARTICLES.filter((a) => a.relatedCategory === pc.cat && a.topic === pc.pet).slice(0, 8);
+  await emit(
+    path,
+    {
+      title: pc.title,
+      description: pc.description,
+      jsonLd: [breadcrumbJsonLd(trail), faqJsonLd(pc.faq), itemListLd(list, SITE_URL, pc.h1)],
+      body: `${crumbs(trail)}<h1>${esc(pc.h1)}</h1>${priceLine(list, pc.h1)}${productList(list)}${paras(pc.intro)}${brands.length ? `<h2>برندهای ${esc(pc.h1)}</h2>${brandLinks(brands)}` : ""}${
+        arts.length ? `<h2>راهنمای خرید ${esc(pc.h1)}</h2>${articleLinks(arts)}` : ""
+      }${faqHtml(pc.faq)}<h2>دسته‌های دیگر ${esc(PET_SLUGS[pc.pet])}</h2>${petCatLinks(LANDING.petCategories.filter((x) => x.pet === pc.pet && x !== pc))}`,
+    },
+    { priority: "0.9", changefreq: "weekly" },
+  );
+}
+
+// برندها
+await emit(
+  "/brands/",
+  {
+    title: "برندهای غذا و لوازم سگ و گربه در موچولو",
+    description: `خرید محصولات اصل ${LANDING.brands.slice(0, 8).map((b) => b.name).join("، ")} و برندهای دیگر غذا، تشویقی، مکمل و لوازم سگ و گربه در پت شاپ موچولو.`,
+    jsonLd: breadcrumbJsonLd([["خانه", "/"], ["برندها", "/brands/"]]),
+    body: `<h1>برندهای غذا و لوازم سگ و گربه</h1>${brandLinks(LANDING.brands)}`,
+  },
+  { priority: "0.7", changefreq: "weekly" },
+);
+for (const b of LANDING.brands) {
+  const path = brandPath(b);
+  const list = brandProducts(products, b, LANDING.brands);
+  const trail = [["خانه", "/"], ["برندها", "/brands/"], [b.name, path]];
+  const cats = [...new Set(list.map((p) => p.category))].map((n) => CATEGORIES.find((c) => c.name === n)).filter(Boolean);
+  await emit(
+    path,
+    {
+      title: `محصولات ${b.name} (${b.latin})؛ خرید اصل با قیمت به‌روز`,
+      description: b.intro.split(/\n/)[0].slice(0, 158),
+      jsonLd: [breadcrumbJsonLd(trail), faqJsonLd(b.faq), itemListLd(list, SITE_URL, `محصولات ${b.name}`), { "@context": "https://schema.org", "@type": "Brand", name: b.latin, alternateName: b.name, url: SITE_URL + path }],
+      body: `${crumbs(trail)}<h1>محصولات ${esc(b.name)} ${esc(b.latin)}</h1>${priceLine(list, `محصولات ${b.name} در موچولو`)}${productList(list)}${paras(b.intro)}${
+        cats.length ? `<h2>دسته‌بندی‌های مرتبط</h2><ul>${cats.map((c) => `<li><a href="/category/${c.slug}/">${esc(c.name)}</a></li>`).join("")}</ul>` : ""
+      }${faqHtml(b.faq)}<h2>برندهای دیگر</h2>${brandLinks(LANDING.brands.filter((x) => x !== b))}`,
+    },
+    { priority: "0.8", changefreq: "weekly" },
   );
 }
 
@@ -275,7 +337,7 @@ for (const p of products) {
       jsonLd: [productJsonLd(p, image), breadcrumbJsonLd(trail)],
       body: `${crumbs(trail)}<h1>${esc(p.name)}</h1>${image ? `<img src="${image}" alt="${esc(p.name)}" width="420">` : ""}<p>${esc(p.desc)}</p><ul>${(p.features || []).map((f) => `<li>${esc(f)}</li>`).join("")}</ul>${
         Number(p.price) > 0 ? `<p>قیمت: ${Number(p.price).toLocaleString("fa-IR")} تومان</p>` : "<p>برای استعلام قیمت با ۰۹۱۹۱۰۰۱۹۴۷ تماس بگیرید.</p>"
-      }<p>برند: ${esc(p.brand || "-")} — مناسب: ${esc(p.pet)}</p>${
+      }<p>برند: ${brandOf(p, LANDING.brands) ? `<a href="${brandPath(brandOf(p, LANDING.brands))}">${esc(p.brand)}</a>` : esc(p.brand || "-")} — مناسب: ${esc(p.pet)}${(() => { const pc = LANDING.petCategories.find((x) => x.cat === cs && PET_SLUGS[x.pet] === p.pet); return pc ? ` — <a href="${petCatPath(pc)}">${esc(pc.h1)}</a>` : ""; })()}</p>${
         guide.tips.length || guide.perKg
           ? `<h2>راهنمای خرید و استفاده</h2>${guide.perKg ? `<p>قیمت هر کیلو: حدود ${guide.perKg.toLocaleString("fa-IR")} تومان</p>` : ""}<ul>${guide.tips.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`
           : ""

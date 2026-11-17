@@ -661,3 +661,10 @@ a.order-row:hover { border-color: var(--primary); background: var(--soft); }
 .product-guide li { list-style: disc; margin-bottom: 4px; }
 .product-guide h3 { margin: 14px 0 4px; font-size: 1rem; }
 .product-guide a { color: var(--primary, #118a8c); text-decoration: underline; }
+
+/* برندها */
+.brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
+.brand-card { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 10px; text-align: center; transition: transform .2s, box-shadow .2s; }
+.brand-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+.brand-card b { font-size: 1.05rem; color: var(--primary, #118A8C); }
+.pcard-meta a { color: inherit; text-decoration: underline dotted; }

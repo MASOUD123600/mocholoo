@@ -6,6 +6,8 @@ import { useApp } from "../store/AppContext";
 import { Empty, Img, Seo, useImageSrc } from "../components/ui";
 import ProductCard from "../components/ProductCard";
 import { SITE_URL, categoryUrl } from "../config";
+import LANDING from "../data/landing.json";
+import { brandOf, brandPath, petCatPath } from "../lib/landing";
 import { breadcrumbJsonLd, productJsonLd } from "../lib/seoLd";
 import { fmt, telLink, toFa, waLink } from "../lib/utils";
 import { productGuide, productTitle } from "../lib/productGuide";
@@ -92,7 +94,14 @@ export default function Product() {
       <div className="product">
         <Gallery images={images} name={p.name} />
         <motion.div className="product-info" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
-          <div className="pcard-meta">{[p.brand, p.category, p.pet].filter(Boolean).join(" • ")}</div>
+          <div className="pcard-meta">
+            {brandOf(p, LANDING.brands) ? <Link to={brandPath(brandOf(p, LANDING.brands))}>{p.brand}</Link> : p.brand}
+            {p.brand && " • "}<Link to={categoryUrl(p.category)}>{p.category}</Link>
+            {(() => {
+              const pc = LANDING.petCategories.find((x) => p.category && categoryUrl(p.category) === `/category/${x.cat}/` && ({ cat: "گربه", dog: "سگ" })[x.pet] === p.pet);
+              return pc ? <> • <Link to={petCatPath(pc)}>{pc.h1}</Link></> : p.pet ? ` • ${p.pet}` : null;
+            })()}
+          </div>
           <h1>{p.name}</h1>
           {p.badge && <span className="tag">{p.badge}</span>}
           <p className="lead">{p.desc}</p>

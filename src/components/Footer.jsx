@@ -35,6 +35,7 @@ export default function Footer() {
           <ul>
             <li><Link to="/about">درباره موچولو</Link></li>
             <li><Link to="/branches/">شعبه‌ها</Link></li>
+            <li><Link to="/brands/">برندها</Link></li>
             <li><Link to="/blog/">مجله موچولو</Link></li>
             <li><Link to="/guide/dog/">نگهداری سگ</Link></li>
             <li><Link to="/guide/cat/">نگهداری گربه</Link></li>

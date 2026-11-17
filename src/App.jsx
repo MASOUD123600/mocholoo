@@ -18,7 +18,7 @@ import { About, Contact, Faq, Terms, Privacy, NotFound } from "./pages/Static";
 import { storage } from "./lib/utils";
 import { trackView } from "./lib/track";
 import { useApp } from "./store/AppContext";
-import { ArticlePage, BlogPage, BranchPage, BranchesPage, CategoryPage, GuidePage, PetPage } from "./pages/SeoPages";
+import { ArticlePage, BlogPage, BrandPage, BrandsPage, BranchPage, BranchesPage, CategoryPage, GuidePage, PetCategoryPage, PetPage } from "./pages/SeoPages";
 
 const Admin = lazy(() => import("./admin/Admin"));
 
@@ -71,6 +71,9 @@ export default function App() {
           <Route path="/reset-password" element={p(<ResetPassword />)} />
           <Route path="/account/*" element={p(<Account />)} />
           <Route path="/category/:slug" element={p(<CategoryPage />)} />
+          <Route path="/category/:slug/:pet" element={p(<PetCategoryPage />)} />
+          <Route path="/brands" element={p(<BrandsPage />)} />
+          <Route path="/brand/:slug" element={p(<BrandPage />)} />
           <Route path="/pet/:slug" element={p(<PetPage />)} />
           <Route path="/branches" element={p(<BranchesPage />)} />
           <Route path="/branch/:slug" element={p(<BranchPage />)} />

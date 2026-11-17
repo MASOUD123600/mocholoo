@@ -8,9 +8,11 @@ import { ProductGrid, SkeletonGrid } from "../components/ProductCard";
 import { BRAND, BRANCHES, CATEGORIES, SITE_URL, categoryBySlug, categoryUrl } from "../config";
 import SEO from "../data/seo.json";
 import INDEX from "../data/contentIndex.json";
+import LANDING from "../data/landing.json";
+import { PET_SLUGS, brandOf, brandPath, brandProducts, itemListLd, petCatPath, petCatProducts, priceRange } from "../lib/landing";
 import { CLUSTERS, TOPICS, blocks, inline } from "../lib/richText";
 import { articleJsonLd, branchLd, breadcrumbJsonLd, faqJsonLd, storeJsonLd } from "../lib/seoLd";
-import { telLink, toFa } from "../lib/utils";
+import { fmt, telLink, toFa } from "../lib/utils";
 
 const paragraphs = (text) => String(text || "").split(/\n+/).filter(Boolean);
 
@@ -195,6 +197,11 @@ export function CategoryPage() {
       <div className="chips scroll">
         {CATEGORIES.map((c) => <Link key={c.slug} to={`/category/${c.slug}/`} className={`chip ${c.slug === slug ? "on" : ""}`}>{c.icon} {c.name}</Link>)}
       </div>
+      {LANDING.petCategories.some((x) => x.cat === slug) && (
+        <div className="chips">
+          {LANDING.petCategories.filter((x) => x.cat === slug).map((x) => <Link key={x.pet} to={petCatPath(x)} className="chip">{x.h1}</Link>)}
+        </div>
+      )}
       <ProductsOf filter={(p) => p.category === cat.name} />
       <div className="seo-wrap">
         <Intro data={data} />
@@ -223,7 +230,8 @@ export function PetPage() {
       <Crumbs trail={trail} />
       <div className="sec-head"><h1 className="h-title">{data.h1}</h1></div>
       <div className="chips scroll">
-        {CATEGORIES.map((c) => <Link key={c.slug} to={`/category/${c.slug}/`} className="chip">{c.icon} {c.name}</Link>)}
+        {LANDING.petCategories.filter((x) => x.pet === slug).map((x) => <Link key={x.cat} to={petCatPath(x)} className="chip">{CATEGORIES.find((c) => c.slug === x.cat)?.icon} {x.h1}</Link>)}
+        <Link to="/brands/" className="chip">🏷️ برندها</Link>
       </div>
       <ProductsOf filter={(p) => p.pet === data.pet || p.pet === "سگ و گربه"} />
       <div className="seo-wrap">
@@ -406,6 +414,112 @@ export function GuidePage() {
         </div>
       ))}
       {g && <div className="container narrow"><FaqList items={g.faq} /></div>}
+    </div>
+  );
+}
+
+// ---------- صفحه دسته + حیوان /category/:slug/:pet (مثل غذای خشک گربه) ----------
+function PriceLine({ list, label }) {
+  const r = priceRange(list);
+  if (!r) return null;
+  return <p className="muted small">{label}: {toFa(list.length)} محصول، قیمت از {fmt(r.min)}{r.max > r.min ? ` تا ${fmt(r.max)}` : ""}.</p>;
+}
+
+export function PetCategoryPage() {
+  const { slug, pet } = useParams();
+  const { visibleProducts } = useApp();
+  const cat = categoryBySlug(slug);
+  const data = LANDING.petCategories.find((x) => x.cat === slug && x.pet === pet);
+  if (!cat || !data) return <NotFoundBlock />;
+  const path = petCatPath(data);
+  const petName = PET_SLUGS[pet];
+  const trail = [["خانه", "/"], ["فروشگاه", "/shop"], [cat.name, `/category/${slug}/`], [data.h1, path]];
+  const list = petCatProducts(visibleProducts, cat.name, pet);
+  const articles = INDEX.articles.filter((a) => a.relatedCategory === slug && (a.topic === pet || a.topic === "general")).slice(0, 8);
+  const brands = LANDING.brands.filter((b) => list.some((p) => brandOf(p, LANDING.brands)?.slug === b.slug));
+  return (
+    <div className="container section">
+      <Seo title={data.title} description={data.description} path={path} jsonLd={[breadcrumbJsonLd(trail), faqJsonLd(data.faq), itemListLd(list, SITE_URL, data.h1)].filter(Boolean)} />
+      <Crumbs trail={trail} />
+      <div className="sec-head"><h1 className="h-title">{data.h1}</h1></div>
+      <PriceLine list={list} label={data.h1} />
+      <div className="chips scroll">
+        {LANDING.petCategories.filter((x) => x.pet === pet).map((x) => <Link key={x.cat} to={petCatPath(x)} className={`chip ${x.cat === slug ? "on" : ""}`}>{x.h1}</Link>)}
+        <Link to={`/pet/${pet}/`} className="chip">همه محصولات {petName}</Link>
+      </div>
+      <ProductsOf filter={(p) => list.includes(p)} />
+      <div className="seo-wrap">
+        <Intro data={data} />
+        {brands.length > 0 && (
+          <div className="card soft">
+            <h2 className="card-title">برندهای {data.h1}</h2>
+            <div className="chips">{brands.map((b) => <Link key={b.slug} className="chip" to={brandPath(b)}>{b.name} ({b.latin})</Link>)}</div>
+          </div>
+        )}
+        {articles.length > 0 && (
+          <div className="card soft">
+            <h2 className="card-title">راهنمای خرید {data.h1}</h2>
+            {articles.map((a) => <Link key={a.slug} className="list-link row-between" to={`/blog/${a.slug}/`}>{a.title} <ArrowLeft size={15} /></Link>)}
+          </div>
+        )}
+        <FaqList items={data.faq} />
+      </div>
+    </div>
+  );
+}
+
+// ---------- برندها /brands و /brand/:slug ----------
+export function BrandsPage() {
+  const { visibleProducts } = useApp();
+  const trail = [["خانه", "/"], ["برندها", "/brands/"]];
+  return (
+    <div className="container section">
+      <Seo title="برندهای غذا و لوازم سگ و گربه در موچولو" description={`خرید محصولات اصل ${LANDING.brands.slice(0, 8).map((b) => b.name).join("، ")} و برندهای دیگر غذا، تشویقی، مکمل و لوازم سگ و گربه در پت شاپ موچولو.`} path="/brands/" jsonLd={breadcrumbJsonLd(trail)} />
+      <Crumbs trail={trail} />
+      <h1 className="h-title">برندهای غذا و لوازم سگ و گربه</h1>
+      <div className="brand-grid">
+        {LANDING.brands.map((b) => (
+          <Link key={b.slug} to={brandPath(b)} className="card brand-card">
+            <b>{b.name}</b>
+            <span dir="ltr" className="muted small">{b.latin}</span>
+            <small className="muted">{toFa(brandProducts(visibleProducts, b, LANDING.brands).length)} محصول</small>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function BrandPage() {
+  const { slug } = useParams();
+  const { visibleProducts } = useApp();
+  const b = LANDING.brands.find((x) => x.slug === slug);
+  if (!b) return <NotFoundBlock />;
+  const path = brandPath(b);
+  const list = brandProducts(visibleProducts, b, LANDING.brands);
+  const trail = [["خانه", "/"], ["برندها", "/brands/"], [b.name, path]];
+  const title = `محصولات ${b.name} (${b.latin})؛ خرید اصل با قیمت به‌روز`;
+  const description = b.intro.split(/\n/)[0].slice(0, 158);
+  const cats = [...new Set(list.map((p) => p.category))];
+  return (
+    <div className="container section">
+      <Seo title={title} description={description} path={path} jsonLd={[breadcrumbJsonLd(trail), faqJsonLd(b.faq), itemListLd(list, SITE_URL, `محصولات ${b.name}`), { "@context": "https://schema.org", "@type": "Brand", name: b.latin, alternateName: b.name, url: SITE_URL + path }].filter(Boolean)} />
+      <Crumbs trail={trail} />
+      <div className="sec-head"><h1 className="h-title">محصولات {b.name} <span dir="ltr">{b.latin}</span></h1></div>
+      <PriceLine list={list} label={`محصولات ${b.name} در موچولو`} />
+      <ProductsOf filter={(p) => list.includes(p)} />
+      <div className="seo-wrap">
+        <Intro data={b} />
+        {cats.length > 0 && (
+          <div className="card soft">
+            <h2 className="card-title">دسته‌بندی‌های مرتبط</h2>
+            <div className="chips">{cats.map((c) => <Link key={c} className="chip" to={categoryUrl(c)}>{c}</Link>)}</div>
+          </div>
+        )}
+        <FaqList items={b.faq} />
+        <h2 className="sub-title">برندهای دیگر</h2>
+        <div className="chips">{LANDING.brands.filter((x) => x.slug !== slug).map((x) => <Link key={x.slug} className="chip" to={brandPath(x)}>{x.name}</Link>)}</div>
+      </div>
     </div>
   );
 }

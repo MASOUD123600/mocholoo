@@ -123,6 +123,7 @@ export default function Header() {
                   <Link key={c.name} to={categoryUrl(c.name)}>{c.icon} {c.name}</Link>
                 ))}
                 <Link to="/branches/">📍 شعبه‌ها</Link>
+                <Link to="/brands/">🏷️ برندها</Link>
                 <Link to="/guide/dog/">🐶 راهنمای نگهداری سگ</Link>
                 <Link to="/guide/cat/">🐱 راهنمای نگهداری گربه</Link>
                 <Link to="/guide/bird/">🦜 راهنمای پرندگان</Link>
