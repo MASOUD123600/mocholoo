@@ -1,14 +1,14 @@
 {
- "checkedAt": "2026-11-04",
+ "checkedAt": "2026-11-17",
  "updates": [
   {
    "id": "avocado-catnip-ball",
-   "price": 320000,
+   "price": 500000,
    "comparePrice": 0
   },
   {
    "id": "cat-grass-teething-stick",
-   "price": 480000,
+   "price": 314000,
    "comparePrice": 0
   },
   {
@@ -45,12 +45,12 @@
   },
   {
    "id": "fish-oil-omega3",
-   "price": 675420,
+   "price": 865000,
    "comparePrice": 0
   },
   {
    "id": "josera-catelux",
-   "price": 5700000,
+   "price": 5450000,
    "comparePrice": 0,
    "name": "غذای خشک گربه جوسرا کتلوکس (۲ کیلوگرم)"
   },
@@ -62,7 +62,7 @@
   },
   {
    "id": "josera-kitten",
-   "price": 5700000,
+   "price": 6500000,
    "comparePrice": 0,
    "name": "غذای خشک بچه گربه جوسرا کیتن (۲ کیلوگرم)"
   },
@@ -74,13 +74,13 @@
   },
   {
    "id": "josera-sensicat",
-   "price": 5225310,
+   "price": 5115000,
    "comparePrice": 0,
    "name": "غذای خشک گربه جوسرا سنسی کت (۲ کیلوگرم)"
   },
   {
    "id": "josicat-crunchy-chicken",
-   "price": 19500000,
+   "price": 19200000,
    "comparePrice": 0,
    "name": "غذای خشک گربه جوسی کت مرغ کرانچی (۱۰ کیلوگرم)"
   },
@@ -96,17 +96,17 @@
   },
   {
    "id": "persa-milk-powder",
-   "price": 657890,
+   "price": 720000,
    "comparePrice": 0
   },
   {
    "id": "polka-puffer-vest",
-   "price": 1290000,
+   "price": 1650000,
    "comparePrice": 0
   },
   {
    "id": "self-clean-grooming-brush",
-   "price": 524000,
+   "price": 613000,
    "comparePrice": 0
   },
   {
@@ -116,12 +116,12 @@
   },
   {
    "id": "smart-car-cat-toy",
-   "price": 2057000,
+   "price": 2263000,
    "comparePrice": 0
   },
   {
    "id": "steam-spray-brush",
-   "price": 370000,
+   "price": 420000,
    "comparePrice": 0
   },
   {
@@ -131,12 +131,12 @@
   },
   {
    "id": "tumbler-ball-toy",
-   "price": 350000,
+   "price": 310000,
    "comparePrice": 0
   },
   {
    "id": "washable-heat-pants",
-   "price": 420000,
+   "price": 540000,
    "comparePrice": 0
   },
   {
@@ -157,7 +157,7 @@
   },
   {
    "id": "yonca-petguard-multivitamin",
-   "price": 1050000,
+   "price": 1550000,
    "comparePrice": 0
   }
  ],
@@ -180,7 +180,7 @@
     "مناسب بازی روزانه",
     "زیر نظر صاحب استفاده شود"
    ],
-   "price": 129990,
+   "price": 139990,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -206,7 +206,7 @@
     "مناسب سگ‌ها و گربه‌ها",
     "برند پرسا"
    ],
-   "price": 180000,
+   "price": 179000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -257,7 +257,7 @@
     "قابل شستشو",
     "استفاده با شیرخشک مخصوص حیوانات"
    ],
-   "price": 190000,
+   "price": 189000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -309,7 +309,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب سگ‌ها"
    ],
-   "price": 2600000,
+   "price": 2430000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -360,7 +360,7 @@
     "کمک به سلامت پوست، مو و گوارش",
     "تغییر غذا را تدریجی و طی ۷ روز انجام دهید"
    ],
-   "price": 5400000,
+   "price": 5399000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -386,7 +386,7 @@
     "طبق جدول روی بسته آماده شود",
     "شیر گاو جایگزین آن نیست"
    ],
-   "price": 699000,
+   "price": 793000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -411,7 +411,7 @@
     "مناسب بازی روزانه",
     "زیر نظر صاحب استفاده شود"
    ],
-   "price": 710000,
+   "price": 699000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -463,7 +463,7 @@
     "کمک به سلامت پوست، مو و گوارش",
     "تغییر غذا را تدریجی و طی ۷ روز انجام دهید"
    ],
-   "price": 783000,
+   "price": 785000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -489,7 +489,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 250000,
+   "price": 280000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -541,7 +541,7 @@
     "کمک به سلامت پوست، مو و گوارش",
     "تغییر غذا را تدریجی و طی ۷ روز انجام دهید"
    ],
-   "price": 5400000,
+   "price": 4927070,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -567,7 +567,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 393000,
+   "price": 460440,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -593,7 +593,7 @@
     "کمک به سلامت پوست، مو و گوارش",
     "تغییر غذا را تدریجی و طی ۷ روز انجام دهید"
    ],
-   "price": 5700000,
+   "price": 4963440,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -670,7 +670,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب گربه‌ها"
    ],
-   "price": 752240,
+   "price": 874110,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -721,7 +721,7 @@
     "تمیزکاری آسان",
     "باکیفیت"
    ],
-   "price": 1700000,
+   "price": 1600000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -747,7 +747,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب گربه‌ها"
    ],
-   "price": 248000,
+   "price": 268000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -773,7 +773,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب سگ‌ها"
    ],
-   "price": 362960,
+   "price": 350000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -799,7 +799,7 @@
     "مناسب سگ‌ها و گربه‌ها",
     "برند پرسا"
    ],
-   "price": 511830,
+   "price": 680550,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -825,7 +825,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 300000,
+   "price": 260350,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -877,7 +877,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب گربه‌ها"
    ],
-   "price": 200000,
+   "price": 198300,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -903,7 +903,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب گربه‌ها"
    ],
-   "price": 220000,
+   "price": 228740,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -954,7 +954,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 600000,
+   "price": 545000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -980,7 +980,7 @@
     "قابل سرو تنها یا همراه غذای خشک",
     "پس از باز شدن در یخچال نگهداری شود"
    ],
-   "price": 290000,
+   "price": 282290,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1058,7 +1058,7 @@
     "کمک به سلامت پوست، مو و گوارش",
     "تغییر غذا را تدریجی و طی ۷ روز انجام دهید"
    ],
-   "price": 2569990,
+   "price": 2809990,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1083,7 +1083,7 @@
     "تمیزکاری آسان",
     "باکیفیت"
    ],
-   "price": 850000,
+   "price": 446000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1135,7 +1135,7 @@
     "کمک به سلامت پوست، مو و گوارش",
     "تغییر غذا را تدریجی و طی ۷ روز انجام دهید"
    ],
-   "price": 506320,
+   "price": 504980,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1161,7 +1161,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 640000,
+   "price": 544360,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1237,7 +1237,7 @@
     "مشورت با دامپزشک در شرایط خاص",
     "مناسب گربه‌ها"
    ],
-   "price": 1390000,
+   "price": 1489000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1262,7 +1262,7 @@
     "تمیزکاری آسان",
     "برند دنیل"
    ],
-   "price": 3127030,
+   "price": 3548340,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1288,7 +1288,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 569000,
+   "price": 534990,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1313,7 +1313,7 @@
     "مناسب گربه‌ها",
     "باکیفیت"
    ],
-   "price": 928000,
+   "price": 1028000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1339,7 +1339,7 @@
     "بسته‌بندی بهداشتی",
     "مصرف در حد اعتدال"
    ],
-   "price": 1504470,
+   "price": 1160000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1391,7 +1391,7 @@
     "مناسب سگ‌ها و گربه‌ها",
     "باکیفیت"
    ],
-   "price": 585000,
+   "price": 700000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1599,7 +1599,7 @@
     "مناسب گربه‌ها",
     "برند میوکا"
    ],
-   "price": 450000,
+   "price": 470000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1625,7 +1625,7 @@
     "مناسب گربه‌ها",
     "برند پتوپیا"
    ],
-   "price": 419000,
+   "price": 415000,
    "comparePrice": 0,
    "stock": 10,
    "active": true,
@@ -1691,9 +1691,9 @@
    "url": "https://www.digikala.com/product/dkp-14163852/",
    "seller": "آرمانی سنتر",
    "sellerUrl": "",
-   "marketPrice": 320000,
+   "marketPrice": 500000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1703,9 +1703,9 @@
    "url": "https://www.digikala.com/product/dkp-21479953/",
    "seller": "هایپرپت ایران",
    "sellerUrl": "https://www.digikala.com/seller/DUMKM/",
-   "marketPrice": 480000,
+   "marketPrice": 314400,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1717,7 +1717,7 @@
    "sellerUrl": "",
    "marketPrice": 420000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1729,7 +1729,7 @@
    "sellerUrl": "",
    "marketPrice": 999000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1741,7 +1741,7 @@
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
    "marketPrice": 340000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1753,7 +1753,7 @@
    "sellerUrl": "",
    "marketPrice": 1290000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1765,7 +1765,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DD4Z5/",
    "marketPrice": 1490000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1777,7 +1777,7 @@
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
    "marketPrice": 280000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1787,9 +1787,9 @@
    "url": "https://www.digikala.com/product/dkp-5497873/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 675420,
+   "marketPrice": 865120,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1799,9 +1799,9 @@
    "url": "https://www.digikala.com/product/dkp-3668449/",
    "seller": "ملودی مهربانی",
    "sellerUrl": "https://www.digikala.com/seller/DD4Z5/",
-   "marketPrice": 5700000,
+   "marketPrice": 5450360,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1811,9 +1811,9 @@
    "url": "https://www.digikala.com/product/dkp-21634377/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 5400000,
+   "marketPrice": 5409000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1823,9 +1823,9 @@
    "url": "https://www.digikala.com/product/dkp-11117183/",
    "seller": "ملودی مهربانی",
    "sellerUrl": "https://www.digikala.com/seller/DD4Z5/",
-   "marketPrice": 5700000,
+   "marketPrice": 6500000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1837,7 +1837,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DUMKM/",
    "marketPrice": 5500000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1847,9 +1847,9 @@
    "url": "https://www.digikala.com/product/dkp-4526232/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 5225310,
+   "marketPrice": 5114730,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1859,9 +1859,9 @@
    "url": "https://www.digikala.com/product/dkp-14390619/",
    "seller": "ملودی مهربانی",
    "sellerUrl": "https://www.digikala.com/seller/DD4Z5/",
-   "marketPrice": 19500000,
+   "marketPrice": 19200000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1873,7 +1873,7 @@
    "sellerUrl": "https://www.digikala.com/seller/HJKTX/",
    "marketPrice": 287000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1885,7 +1885,7 @@
    "sellerUrl": "",
    "marketPrice": 320000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1895,9 +1895,9 @@
    "url": "https://www.digikala.com/product/dkp-1935413/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 657890,
+   "marketPrice": 720000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1907,9 +1907,9 @@
    "url": "https://www.digikala.com/product/dkp-10377059/",
    "seller": "بهنام اسپورت",
    "sellerUrl": "",
-   "marketPrice": 1290000,
+   "marketPrice": 1650000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1919,9 +1919,9 @@
    "url": "https://www.digikala.com/product/dkp-10764458/",
    "seller": "پت شاپ تهران",
    "sellerUrl": "",
-   "marketPrice": 524000,
+   "marketPrice": 613000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1933,7 +1933,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DKHJJ/",
    "marketPrice": 687570,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1943,9 +1943,9 @@
    "url": "https://www.digikala.com/product/dkp-21474084/",
    "seller": "درنا پت تهران",
    "sellerUrl": "",
-   "marketPrice": 2057000,
+   "marketPrice": 2262700,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1955,9 +1955,9 @@
    "url": "https://www.digikala.com/product/dkp-15078363/",
    "seller": "فرپلاست",
    "sellerUrl": "",
-   "marketPrice": 370000,
+   "marketPrice": 420000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1969,7 +1969,7 @@
    "sellerUrl": "",
    "marketPrice": 350000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1979,9 +1979,9 @@
    "url": "https://www.digikala.com/product/dkp-940937/",
    "seller": "تیفاین",
    "sellerUrl": "",
-   "marketPrice": 350000,
+   "marketPrice": 310000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -1991,9 +1991,9 @@
    "url": "https://www.digikala.com/product/dkp-18333789/",
    "seller": "یوتادو",
    "sellerUrl": "",
-   "marketPrice": 420000,
+   "marketPrice": 540000,
    "match": "similar",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2005,7 +2005,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DUMKM/",
    "marketPrice": 1468540,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": [
@@ -2027,7 +2027,7 @@
    "match": "similar",
    "checkedAt": "2026-11-04",
    "phone": "",
-   "note": "",
+   "note": " ناموجود در دیجی‌کالا ۲۶ آبان",
    "alt": []
   },
   "winston-cat-pouch": {
@@ -2037,7 +2037,7 @@
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
    "marketPrice": 350000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2047,9 +2047,9 @@
    "url": "https://www.digikala.com/product/dkp-14673069/",
    "seller": "آراد پت شاپ",
    "sellerUrl": "",
-   "marketPrice": 1050000,
+   "marketPrice": 1550000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2059,9 +2059,9 @@
    "url": "https://www.digikala.com/product/dkp-384980/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 129990,
+   "marketPrice": 139990,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2071,9 +2071,9 @@
    "url": "https://www.digikala.com/product/dkp-986729/",
    "seller": "رامکال پت شاپ",
    "sellerUrl": "https://www.digikala.com/seller/GG72U/",
-   "marketPrice": 180000,
+   "marketPrice": 179000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2085,7 +2085,7 @@
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
    "marketPrice": 5525000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2095,9 +2095,9 @@
    "url": "https://www.digikala.com/product/dkp-1622187/",
    "seller": "خانه ریکو",
    "sellerUrl": "https://www.digikala.com/seller/HVZ3N/",
-   "marketPrice": 190000,
+   "marketPrice": 189000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2109,7 +2109,7 @@
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
    "marketPrice": 870000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2119,9 +2119,9 @@
    "url": "https://www.digikala.com/product/dkp-2013426/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 2600000,
+   "marketPrice": 2430000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2133,7 +2133,7 @@
    "sellerUrl": "https://www.digikala.com/seller/D3ASR/",
    "marketPrice": 1500000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2143,9 +2143,9 @@
    "url": "https://www.digikala.com/product/dkp-2224792/",
    "seller": "پوفی پت",
    "sellerUrl": "https://www.digikala.com/seller/AY6WF/",
-   "marketPrice": 5400000,
+   "marketPrice": 5399000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2155,9 +2155,9 @@
    "url": "https://www.digikala.com/product/dkp-2784759/",
    "seller": "فروشگاه حیوانات خانگی کیپو",
    "sellerUrl": "https://www.digikala.com/seller/D57R6/",
-   "marketPrice": 699000,
+   "marketPrice": 793000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2167,9 +2167,9 @@
    "url": "https://www.digikala.com/product/dkp-3001426/",
    "seller": "پت نپ شاپ",
    "sellerUrl": "https://www.digikala.com/seller/HHC7Y/",
-   "marketPrice": 710000,
+   "marketPrice": 699000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2181,7 +2181,7 @@
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
    "marketPrice": 3950000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2191,9 +2191,9 @@
    "url": "https://www.digikala.com/product/dkp-3540612/",
    "seller": "دیجیا پت",
    "sellerUrl": "https://www.digikala.com/seller/5AF6J/",
-   "marketPrice": 783000,
+   "marketPrice": 785000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2203,9 +2203,9 @@
    "url": "https://www.digikala.com/product/dkp-3748026/",
    "seller": "بازرگانی پتی",
    "sellerUrl": "https://www.digikala.com/seller/D3ASR/",
-   "marketPrice": 250000,
+   "marketPrice": 280000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2217,7 +2217,7 @@
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
    "marketPrice": 3280000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2227,9 +2227,9 @@
    "url": "https://www.digikala.com/product/dkp-4372125/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 5400000,
+   "marketPrice": 4927070,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2239,9 +2239,9 @@
    "url": "https://www.digikala.com/product/dkp-4510233/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 393000,
+   "marketPrice": 460440,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2251,9 +2251,9 @@
    "url": "https://www.digikala.com/product/dkp-4742101/",
    "seller": "ملودی مهربانی",
    "sellerUrl": "https://www.digikala.com/seller/DD4Z5/",
-   "marketPrice": 5700000,
+   "marketPrice": 4963440,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2265,7 +2265,7 @@
    "sellerUrl": "https://www.digikala.com/seller/FR96A/",
    "marketPrice": 300000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2277,7 +2277,7 @@
    "sellerUrl": "https://www.digikala.com/seller/GF3U9/",
    "marketPrice": 400000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2287,9 +2287,9 @@
    "url": "https://www.digikala.com/product/dkp-5537676/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 752240,
+   "marketPrice": 874110,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2301,7 +2301,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DUMKM/",
    "marketPrice": 240000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2311,9 +2311,9 @@
    "url": "https://www.digikala.com/product/dkp-5773507/",
    "seller": "الدوراشاپینگ",
    "sellerUrl": "https://www.digikala.com/seller/H4AVC/",
-   "marketPrice": 1700000,
+   "marketPrice": 1600000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2323,9 +2323,9 @@
    "url": "https://www.digikala.com/product/dkp-6038409/",
    "seller": "فروشگاه حیوانات خانگی کیپو",
    "sellerUrl": "https://www.digikala.com/seller/D57R6/",
-   "marketPrice": 248000,
+   "marketPrice": 268000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2335,9 +2335,9 @@
    "url": "https://www.digikala.com/product/dkp-6184101/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 362960,
+   "marketPrice": 350000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2347,9 +2347,9 @@
    "url": "https://www.digikala.com/product/dkp-6493913/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 511830,
+   "marketPrice": 680550,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2359,9 +2359,9 @@
    "url": "https://www.digikala.com/product/dkp-6586129/",
    "seller": "بازرگانی پتی",
    "sellerUrl": "https://www.digikala.com/seller/D3ASR/",
-   "marketPrice": 300000,
+   "marketPrice": 260350,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2375,7 +2375,7 @@
    "match": "exact",
    "checkedAt": "2026-11-04",
    "phone": "",
-   "note": "",
+   "note": " ناموجود در دیجی‌کالا ۲۶ آبان",
    "alt": []
   },
   "cat-supplement-persa-7929885": {
@@ -2383,9 +2383,9 @@
    "url": "https://www.digikala.com/product/dkp-7929885/",
    "seller": "پتیکور",
    "sellerUrl": "https://www.digikala.com/seller/HYTJS/",
-   "marketPrice": 200000,
+   "marketPrice": 198300,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2395,9 +2395,9 @@
    "url": "https://www.digikala.com/product/dkp-8392326/",
    "seller": "پت آباد",
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
-   "marketPrice": 220000,
+   "marketPrice": 228740,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2409,7 +2409,7 @@
    "sellerUrl": "https://www.digikala.com/seller/D6W32/",
    "marketPrice": 199000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2419,9 +2419,9 @@
    "url": "https://www.digikala.com/product/dkp-9695723/",
    "seller": "پت آباد",
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
-   "marketPrice": 600000,
+   "marketPrice": 545000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2431,9 +2431,9 @@
    "url": "https://www.digikala.com/product/dkp-9766053/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 290000,
+   "marketPrice": 282290,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2445,7 +2445,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DUMKM/",
    "marketPrice": 421200,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2457,7 +2457,7 @@
    "sellerUrl": "https://www.digikala.com/seller/EH7M5/",
    "marketPrice": 425000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2467,9 +2467,9 @@
    "url": "https://www.digikala.com/product/dkp-10310751/",
    "seller": "دیجیا پت",
    "sellerUrl": "https://www.digikala.com/seller/5AF6J/",
-   "marketPrice": 2569990,
+   "marketPrice": 2809990,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2479,9 +2479,9 @@
    "url": "https://www.digikala.com/product/dkp-10406512/",
    "seller": "بازرگانی ادریس",
    "sellerUrl": "https://www.digikala.com/seller/F2SN2/",
-   "marketPrice": 850000,
+   "marketPrice": 446000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2495,7 +2495,7 @@
    "match": "exact",
    "checkedAt": "2026-11-04",
    "phone": "",
-   "note": "",
+   "note": " ناموجود در دیجی‌کالا ۲۶ آبان",
    "alt": []
   },
   "dog-dry-food-mofid-11500801": {
@@ -2503,9 +2503,9 @@
    "url": "https://www.digikala.com/product/dkp-11500801/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 506320,
+   "marketPrice": 504980,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2515,9 +2515,9 @@
    "url": "https://www.digikala.com/product/dkp-12845648/",
    "seller": "سین تکسچر",
    "sellerUrl": "https://www.digikala.com/seller/HJE5N/",
-   "marketPrice": 640000,
+   "marketPrice": 544360,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2529,7 +2529,7 @@
    "sellerUrl": "https://www.digikala.com/seller/CXRSS/",
    "marketPrice": 1700000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2541,7 +2541,7 @@
    "sellerUrl": "https://www.digikala.com/seller/5AEMA/",
    "marketPrice": 280000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2551,9 +2551,9 @@
    "url": "https://www.digikala.com/product/dkp-15282693/",
    "seller": "بازرگانی لیلاک",
    "sellerUrl": "https://www.digikala.com/seller/ANCT6/",
-   "marketPrice": 1390000,
+   "marketPrice": 1489000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2563,9 +2563,9 @@
    "url": "https://www.digikala.com/product/dkp-15317419/",
    "seller": "بازرگانی کالادون",
    "sellerUrl": "https://www.digikala.com/seller/CRPYG/",
-   "marketPrice": 3127030,
+   "marketPrice": 3548340,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2575,9 +2575,9 @@
    "url": "https://www.digikala.com/product/dkp-15790875/",
    "seller": "زامزی شاپ",
    "sellerUrl": "https://www.digikala.com/seller/HJ2T4/",
-   "marketPrice": 569000,
+   "marketPrice": 534990,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2587,9 +2587,9 @@
    "url": "https://www.digikala.com/product/dkp-16169668/",
    "seller": "کالاتاپس",
    "sellerUrl": "https://www.digikala.com/seller/HDV26/",
-   "marketPrice": 928000,
+   "marketPrice": 1028000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2599,9 +2599,9 @@
    "url": "https://www.digikala.com/product/dkp-16622578/",
    "seller": "هایپرپت ایران",
    "sellerUrl": "https://www.digikala.com/seller/DUMKM/",
-   "marketPrice": 1504470,
+   "marketPrice": 1160000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2615,7 +2615,7 @@
    "match": "exact",
    "checkedAt": "2026-11-04",
    "phone": "",
-   "note": "",
+   "note": " ناموجود در دیجی‌کالا ۲۶ آبان",
    "alt": []
   },
   "pet-care-mocholoo-19192461": {
@@ -2623,9 +2623,9 @@
    "url": "https://www.digikala.com/product/dkp-19192461/",
    "seller": "پت شاپ چیکوپت",
    "sellerUrl": "https://www.digikala.com/seller/GKT2P/",
-   "marketPrice": 585000,
+   "marketPrice": 700000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2637,7 +2637,7 @@
    "sellerUrl": "https://www.digikala.com/seller/FX2KU/",
    "marketPrice": 300000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2649,7 +2649,7 @@
    "sellerUrl": "https://www.digikala.com/seller/FX2KU/",
    "marketPrice": 195000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2661,7 +2661,7 @@
    "sellerUrl": "https://www.digikala.com/seller/FX2KU/",
    "marketPrice": 200000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2673,7 +2673,7 @@
    "sellerUrl": "https://www.digikala.com/seller/petabad/",
    "marketPrice": 300000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2685,7 +2685,7 @@
    "sellerUrl": "https://www.digikala.com/seller/ENKAG/",
    "marketPrice": 638000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2697,7 +2697,7 @@
    "sellerUrl": "https://www.digikala.com/seller/J4TKG/",
    "marketPrice": 638000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2709,7 +2709,7 @@
    "sellerUrl": "https://www.digikala.com/seller/HJKTX/",
    "marketPrice": 166900,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2719,9 +2719,9 @@
    "url": "https://www.digikala.com/product/dkp-22488300/",
    "seller": "میوکا پت",
    "sellerUrl": "https://www.digikala.com/seller/EJTW7/",
-   "marketPrice": 450000,
+   "marketPrice": 470000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2731,9 +2731,9 @@
    "url": "https://www.digikala.com/product/dkp-22534828/",
    "seller": "فروشگاه حیوانات خانگی کیپو",
    "sellerUrl": "https://www.digikala.com/seller/D57R6/",
-   "marketPrice": 419000,
+   "marketPrice": 415000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2745,7 +2745,7 @@
    "sellerUrl": "https://www.digikala.com/seller/A2K76/",
    "marketPrice": 1240000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
@@ -2757,7 +2757,7 @@
    "sellerUrl": "https://www.digikala.com/seller/DKHJJ/",
    "marketPrice": 600000,
    "match": "exact",
-   "checkedAt": "2026-11-04",
+   "checkedAt": "2026-11-17",
    "phone": "",
    "note": "",
    "alt": []
