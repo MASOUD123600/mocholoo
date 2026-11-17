@@ -29,6 +29,19 @@
   status = 200
   force = true
 
+# شعبه‌های قدیمی (آبان ۱۴۰۵ با ۶ شعبه ثبت‌شده در نشان جایگزین شدند)
+[[redirects]]
+  from = "/branch/tehranpars/*"
+  to = "/branches/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/branch/mehrshahr/*"
+  to = "/branches/"
+  status = 301
+  force = true
+
 # صفحات SPA (فایل‌های ساخته‌شده در dist مثل /p/slug اولویت دارند)
 [[redirects]]
   from = "/*"

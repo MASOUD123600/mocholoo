@@ -59,7 +59,7 @@ function Hero() {
           <motion.div className="hero-stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
             <div><b>{toFa(visibleProducts.length)}+</b><span>محصول اصل</span></div>
             <div><b>۱۰۰٪</b><span>ضمانت اصالت</span></div>
-            <div><b>۴ شعبه</b><span>تهران و کرج</span></div>
+            <div><b>۶ شعبه</b><span>تهران و کرج</span></div>
           </motion.div>
         </div>
         <div className="hero-visual">
@@ -71,7 +71,7 @@ function Hero() {
               <Link to={`/p/${pick.slug || pick.id}`}><Img src={pick.images?.[0]} small alt={pick.name} /></Link>
             </motion.div>
           )}
-          <motion.div className="float-badge fb1" animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 3.2 }}>📍 ۴ شعبه در تهران و کرج</motion.div>
+          <motion.div className="float-badge fb1" animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 3.2 }}>📍 ۶ شعبه در تهران و کرج</motion.div>
           <motion.div className="float-badge fb2" animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 3.8, delay: 0.6 }}>✅ ۱۰۰٪ اصل</motion.div>
           <motion.div className="float-badge fb3" animate={{ rotate: [0, 8, -8, 0] }} transition={{ repeat: Infinity, duration: 4 }}>😻</motion.div>
         </div>

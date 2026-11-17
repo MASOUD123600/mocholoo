@@ -41,13 +41,17 @@ export const categoryUrl = (name) => {
 };
 export const PETS = ["گربه", "سگ", "سگ و گربه", "پرنده", "جوندگان"];
 
-// شعبه‌ها — نشانی دقیق هر شعبه را وقتی آماده شد اینجا (یا از پنل) کامل کنید
+// شعبه‌ها — نام و نشانی دقیقاً مثل ثبت در نشان (۲۶ آبان ۱۴۰۵)؛ neshan = صفحه همان مکان در نشان
+const NESHAN = (id) => `https://neshan.org/maps/places/${id}`;
 export const BRANCHES = [
-  { slug: "tajrish", name: "تجریش", city: "تهران", region: "شمال تهران", address: "تهران، میدان تجریش", main: true },
-  { slug: "tehranpars", name: "تهرانپارس", city: "تهران", region: "شرق تهران", address: "تهران، تهرانپارس، قنات کوثر، بلوار مطهری، نبش کوچه دهم مرکزی، پلاک ۱۰۶ و ۴" },
-  { slug: "mehrshahr", name: "مهرشهر", city: "کرج", region: "کرج", address: "کرج، مهرشهر، میدان مهرشهر" },
-  { slug: "fardis", name: "فردیس", city: "کرج", region: "کرج", address: "کرج، فردیس، فلکه اول" },
+  { slug: "fardis", num: 1, name: "فردیس", city: "کرج", region: "کرج", address: "کرج، فردیس، فلکه اول" },
+  { slug: "gohardasht", num: 2, name: "گوهردشت", city: "کرج", region: "کرج", address: "کرج، بلوار آزادی، بین ششم فاز ۱ و پنجم فاز ۲، پلاک ۱۰، فاز دو گوهردشت (رجایی‌شهر)", neshan: NESHAN("1f5d4bf6b0f9bdcbee1c0fda4e5fdffc"), lat: 35.849038, lng: 50.974077 },
+  { slug: "punak", num: 3, name: "پونک", city: "تهران", region: "شمال غرب تهران", address: "تهران، بزرگراه اشرفی اصفهانی، کربلایی احمد، بین دوم و اول، مرکز خرید بوستان (پونک شمالی)", neshan: NESHAN("8f7c214c177cda98ef33d48ad0927c1a"), lat: 35.761661, lng: 51.33414 },
+  { slug: "saadat-abad", num: 4, name: "سعادت‌آباد", city: "تهران", region: "شمال غرب تهران", address: "تهران، سعادت‌آباد، بین مقدس و کیان، بوستان سنگی (محله دریا)", neshan: NESHAN("894b0025d3a96b9c83c8c4ea7a70c536"), lat: 35.780471, lng: 51.375218 },
+  { slug: "tajrish", num: 5, name: "تجریش", city: "تهران", region: "شمال تهران", address: "تهران، خیابان شریعتی، بین ماهروزاده و رفعت (دزاشیب، نزدیک تجریش)", neshan: NESHAN("2157ccd1eb7134995c643d210198b65a"), lat: 35.802528, lng: 51.433999, main: true },
+  { slug: "azimieh", num: 6, name: "عظیمیه", city: "کرج", region: "کرج", address: "کرج، بلوار شریعتی، بین رسالت ۱۷ و میدان استقلال، پلاک ۱۴ (عظیمیه)", neshan: NESHAN("d191634a13143ce1b097908bc9243e6b"), lat: 35.834798, lng: 51.018495 },
 ];
+export const MAIN_BRANCH = BRANCHES.find((b) => b.main) || BRANCHES[0];
 
 export const THEMES = {
   mocholoo: { label: "فیروزه‌ای موچولو", primaryColor: "#118A8C", darkColor: "#0B3D48", accentColor: "#FFB547", hotColor: "#FF7A59", bgColor: "#F4FBFA" },
@@ -59,7 +63,7 @@ export const THEMES = {
 export const DEFAULT_SETTINGS = {
   siteName: BRAND.siteName,
   tagline: "کوچولوی تو، دنیای ما",
-  announcement: "🐾 ۴ شعبه در تجریش، تهرانپارس، مهرشهر و فردیس — ارسال سریع، کالای اصل، مشاوره رایگان",
+  announcement: "🐾 ۶ شعبه در تهران و کرج: تجریش، سعادت‌آباد، پونک، گوهردشت، عظیمیه و فردیس — ارسال سریع، کالای اصل، مشاوره رایگان",
   heroTitle: "هرچی پشمالوت لازم داره،",
   heroHighlight: "تو موچولو هست",
   heroSubtitle: "غذای خشک و مرطوب، تشویقی، مکمل، شیرخشک، اسباب‌بازی و لوازم اصل سگ و گربه از برندهای معتبر دنیا؛ با مشاوره رایگان و ارسال سریع.",
@@ -72,13 +76,13 @@ export const DEFAULT_SETTINGS = {
   phone: "09191001947",
   phone2: "",
   email: "info@mocholoo.ir",
-  address: BRANCHES[0].address,
+  address: MAIN_BRANCH.address,
   instagram: BRAND.instagram,
   telegram: "",
   bale: "",
-  mapUrl: "",
+  mapUrl: MAIN_BRANCH.neshan || "",
   workHours: "",
-  footerDesc: "پت شاپ موچولو؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان، در ۴ شعبه تهران و کرج و فروشگاه آنلاین.",
+  footerDesc: "پت شاپ موچولو؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان، در ۶ شعبه تهران و کرج و فروشگاه آنلاین.",
   freeShippingMin: "0",
   shippingCost: "0",
   referralPercent: "10",

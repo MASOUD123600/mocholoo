@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, BookOpen, Calendar, Clock, Instagram, MapPin, Phone, User } from "lucide-react";
+import { ArrowLeft, BookOpen, Calendar, Clock, Instagram, MapPin, Navigation, Phone, User } from "lucide-react";
 import { useApp } from "../store/AppContext";
 import { Empty, Reveal, Seo, Spinner } from "../components/ui";
 import { ProductGrid, SkeletonGrid } from "../components/ProductCard";
@@ -58,10 +58,17 @@ export function BranchCards({ title = true }) {
             <Link to={`/branch/${b.slug}/`} className="branch-card">
               <motion.span className="branch-pin" whileHover={{ y: -6 }}><MapPin size={22} /></motion.span>
               <b>پت شاپ {b.name}</b>
-              <small>{b.city}{b.main ? " • شعبه اصلی" : ""}</small>
+              <small>شعبه {toFa(b.num)} • {b.city}</small>
               <span className="muted small">{b.address}</span>
-              <span className="branch-call" onClick={(e) => { e.preventDefault(); window.location.href = telLink(S.phone); }}>
-                <Phone size={15} /> {toFa(S.phone)}
+              <span className="branch-actions">
+                <span className="branch-call" onClick={(e) => { e.preventDefault(); window.location.href = telLink(S.phone); }}>
+                  <Phone size={15} /> {toFa(S.phone)}
+                </span>
+                {b.neshan && (
+                  <span className="branch-call branch-map" role="link" title={`مسیریابی شعبه ${b.name} در نشان`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(b.neshan, "_blank", "noopener"); }}>
+                    <Navigation size={15} /> مسیریابی در نشان
+                  </span>
+                )}
               </span>
             </Link>
           </Reveal>
@@ -236,12 +243,12 @@ export function BranchesPage() {
     <div className="section">
       <Seo
         title="شعبه‌های پت شاپ موچولو در تهران و کرج"
-        description="آدرس و تلفن شعبه‌های پت شاپ موچولو در تجریش، تهرانپارس، مهرشهر و فردیس؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان."
+        description="آدرس و تلفن شعبه‌های پت شاپ موچولو در تجریش، سعادت‌آباد، پونک، گوهردشت، عظیمیه و فردیس؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان."
         path="/branches/"
         jsonLd={[breadcrumbJsonLd(trail), storeJsonLd()]}
       />
       <div className="container"><Crumbs trail={trail} /><h1 className="h-title">شعبه‌های پت شاپ {BRAND.name} در تهران و کرج</h1>
-        {kw.length > 0 && <p className="muted">{BRAND.siteName} با ۴ شعبه در تهران (تجریش و تهرانپارس) و کرج (مهرشهر و فردیس) آماده خدمت است. برای نشانی دقیق و موجودی هر شعبه تماس بگیرید.</p>}
+        {kw.length > 0 && <p className="muted">{BRAND.siteName} با ۶ شعبه در تهران (تجریش، سعادت‌آباد و پونک) و کرج (گوهردشت، عظیمیه و فردیس) آماده خدمت است. با زدن «مسیریابی در نشان» موقعیت هر شعبه مستقیم در نقشه نشان باز می‌شود.</p>}
       </div>
       <BranchCards title={false} />
     </div>
@@ -264,12 +271,13 @@ export function BranchPage() {
         <div>
           <h1 className="h-title">{data.h1}</h1>
           <ul className="contact-list">
-            <li><MapPin size={17} /> {b.address}</li>
+            <li><MapPin size={17} /> {b.neshan ? <a href={b.neshan} target="_blank" rel="noopener">{b.address}</a> : b.address}</li>
             <li><Phone size={17} /> <a href={telLink(S.phone)}>{toFa(S.phone)}</a></li>
             {S.instagram && <li><Instagram size={17} /> <a href={`https://www.instagram.com/${S.instagram}/`} target="_blank" rel="noopener noreferrer" dir="ltr">@{S.instagram}</a></li>}
           </ul>
           <div className="row-gap">
-            <a className="btn btn-p" href={telLink(S.phone)}><Phone size={17} /> تماس و استعلام موجودی</a>
+            {b.neshan && <a className="btn btn-p" href={b.neshan} target="_blank" rel="noopener"><Navigation size={17} /> مسیریابی در نشان</a>}
+            <a className={`btn ${b.neshan ? "btn-ghost" : "btn-p"}`} href={telLink(S.phone)}><Phone size={17} /> تماس و استعلام موجودی</a>
             <Link className="btn btn-ghost" to="/shop">خرید آنلاین</Link>
           </div>
         </div>

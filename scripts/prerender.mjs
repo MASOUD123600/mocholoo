@@ -97,7 +97,8 @@ const pUrl = (p) => `/p/${p.slug || p.id}/`;
 const productList = (list) =>
   `<ul>${list.map((p) => `<li><a href="${pUrl(p)}">${esc(p.name)}</a>${Number(p.price) > 0 ? ` — ${Number(p.price).toLocaleString("fa-IR")} تومان` : ""}</li>`).join("")}</ul>`;
 const catSlug = (name) => CATEGORIES.find((c) => c.name === name)?.slug;
-const branchList = `<ul>${BRANCHES.map((b) => `<li><a href="/branch/${b.slug}/">پت شاپ ${esc(b.name)}</a> — ${esc(b.address)}</li>`).join("")}</ul>`;
+const neshanLink = (b) => (b.neshan ? ` — <a href="${b.neshan}" target="_blank" rel="noopener">مسیریابی شعبه ${esc(b.name)} در نشان</a>` : "");
+const branchList = `<ul>${BRANCHES.map((b) => `<li><a href="/branch/${b.slug}/">پت شاپ موچولو شعبه ${b.num} (${esc(b.name)})</a> — ${esc(b.address)}${neshanLink(b)}</li>`).join("")}</ul>`;
 
 // صفحه اصلی
 await emit(
@@ -171,7 +172,7 @@ await emit(
   "/branches/",
   {
     title: "شعبه‌های پت شاپ موچولو در تهران و کرج",
-    description: "آدرس و تلفن شعبه‌های پت شاپ موچولو در تجریش، تهرانپارس، مهرشهر و فردیس؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان.",
+    description: "آدرس و تلفن شعبه‌های پت شاپ موچولو در تجریش، سعادت‌آباد، پونک، گوهردشت، عظیمیه و فردیس؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان.",
     jsonLd: [breadcrumbJsonLd([["خانه", "/"], ["شعبه‌ها", "/branches/"]]), storeJsonLd()],
     body: `<h1>شعبه‌های پت شاپ ${esc(BRAND.name)} در تهران و کرج</h1>${branchList}<p>تلفن: ۰۹۱۹۱۰۰۱۹۴۷</p>`,
   },
@@ -188,7 +189,7 @@ for (const b of SEO.branches) {
       title: b.title,
       description: b.description,
       jsonLd: [breadcrumbJsonLd(trail), { "@context": "https://schema.org", ...ld }],
-      body: `${crumbs(trail)}<h1>${esc(b.h1)}</h1><p>نشانی: ${esc(info?.address)} — تلفن: ۰۹۱۹۱۰۰۱۹۴۷</p>${paras(b.intro)}<h2>شعبه‌های دیگر</h2>${branchList}`,
+      body: `${crumbs(trail)}<h1>${esc(b.h1)}</h1><p>نشانی: ${esc(info?.address)} — تلفن: ۰۹۱۹۱۰۰۱۹۴۷${info ? neshanLink(info) : ""}</p>${paras(b.intro)}<h2>شعبه‌های دیگر</h2>${branchList}`,
     },
     { priority: "0.8" },
   );
@@ -286,7 +287,7 @@ for (const p of products) {
 
 // صفحات ثابت (محتوای اصلی را React می‌سازد؛ اینجا عنوان و توضیحات درست برای خزنده)
 for (const [path, title, description] of [
-  ["/about/", "درباره پت شاپ موچولو", "داستان پت شاپ موچولو؛ فروشگاه آنلاین و ۴ شعبه حضوری در تجریش، تهرانپارس، مهرشهر و فردیس برای غذا و لوازم اصل سگ و گربه."],
+  ["/about/", "درباره پت شاپ موچولو", "داستان پت شاپ موچولو؛ فروشگاه آنلاین و ۶ شعبه حضوری در تهران و کرج برای غذا و لوازم اصل سگ و گربه."],
   ["/contact/", "تماس با پت شاپ موچولو", "شماره تماس، اینستاگرام و آدرس شعبه‌های پت شاپ موچولو در تهران و کرج."],
   ["/faq/", "سؤالات متداول خرید", "پاسخ سؤالات رایج درباره ارسال، پرداخت، اصالت کالا و مرجوعی در پت شاپ موچولو."],
   ["/terms/", "قوانین و شرایط خرید", "قوانین خرید، ارسال، پرداخت و مرجوعی کالا در پت شاپ موچولو."],

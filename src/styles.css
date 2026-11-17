@@ -604,6 +604,10 @@ a.order-row:hover { border-color: var(--primary); background: var(--soft); }
 .branch-card b { font-size: 1.1rem; font-weight: 900; color: var(--dark); }
 .branch-pin { width: 48px; height: 48px; border-radius: 16px; background: var(--primary); color: #fff; display: grid; place-items: center; }
 .branch-call { margin-top: auto; display: inline-flex; gap: 6px; align-items: center; color: var(--primary); font-weight: 800; position: relative; z-index: 1; }
+.branch-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; position: relative; z-index: 1; }
+.branch-actions .branch-call { margin-top: 0; }
+.branch-map { background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 0.85rem; }
+.branch-map:hover { filter: brightness(1.08); }
 .branch-hero { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .branch-art { font-size: 6rem; }
 .articles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }

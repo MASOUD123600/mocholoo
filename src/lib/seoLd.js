@@ -27,7 +27,9 @@ export const branchLd = (b, phone) => ({
   telephone: intlPhone(phone),
   image: `${SITE_URL}/icon-512.png`,
   priceRange: "$$",
-  address: { "@type": "PostalAddress", streetAddress: b.address, addressLocality: b.city, addressCountry: "IR" },
+  address: { "@type": "PostalAddress", streetAddress: b.address, addressLocality: b.city, addressRegion: b.city === "کرج" ? "البرز" : "تهران", addressCountry: "IR" },
+  ...(b.lat ? { geo: { "@type": "GeoCoordinates", latitude: b.lat, longitude: b.lng } } : {}),
+  ...(b.neshan ? { hasMap: b.neshan, sameAs: [b.neshan] } : {}),
   parentOrganization: { "@id": `${SITE_URL}/#org` },
 });
 
