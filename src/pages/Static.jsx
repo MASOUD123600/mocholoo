@@ -5,7 +5,8 @@ import { Clock, Instagram, MapPin, Phone } from "lucide-react";
 import { useApp } from "../store/AppContext";
 import { Empty, Reveal, Seo } from "../components/ui";
 import { telLink, toFa, waLink } from "../lib/utils";
-import { BranchCards } from "./SeoPages";
+import { BranchCards, FaqList, faqJsonLd, storeJsonLd } from "./SeoPages";
+import ABOUT_FAQ from "../data/aboutFaq.json";
 
 const Doc = ({ title, children }) => (
   <div className="container section narrow">
@@ -14,16 +15,18 @@ const Doc = ({ title, children }) => (
   </div>
 );
 
+
 export function About() {
   const { settings: S } = useApp();
   return (
     <div className="container section">
-      <Seo title="درباره ما" description="داستان پت شاپ موچولو؛ فروشگاه آنلاین و ۶ شعبه حضوری در تهران و کرج برای غذا و لوازم اصل سگ و گربه." path="/about/" image="/brand/europet-banner.webp" />
+      <Seo title="پت شاپ موچولو (Mocholoo) کیست؟ درباره موچولو" description="موچولو (Mocholoo، mocholoo.ir) پت شاپ آنلاین و حضوری با ۶ شعبه در تهران و کرج است؛ غذا و لوازم اصل سگ و گربه با مشاوره رایگان." path="/about/" image="/brand/europet-banner.webp" jsonLd={[storeJsonLd(), faqJsonLd(ABOUT_FAQ)]} />
       <div className="about">
         <Reveal className="about-img"><img src="/brand/europet-banner.webp" alt="محصولات اصل در پت شاپ موچولو" /></Reveal>
         <Reveal className="prose" delay={0.1}>
           <span className="pill">💚 {S.tagline}</span>
-          <h1 className="h-title">درباره <span>موچولو</span></h1>
+          <h1 className="h-title">پت شاپ <span>موچولو</span> (Mocholoo) کیست؟</h1>
+          <p><b>موچولو</b> (به انگلیسی Mocholoo) نام پت شاپ آنلاین و حضوری ماست؛ سایت رسمی <b>mocholoo.ir</b> و اینستاگرام <span dir="ltr">@mocholo.pet</span>. نام ما با «م» نوشته می‌شود، نه «کوچولو».</p>
           <p>موچولو با یک هدف ساده شروع شد: اینکه صاحبان سگ و گربه بتوانند غذا و لوازم <b>اصل، تازه و باکیفیت</b> را با قیمت منصفانه و بدون دردسر تهیه کنند.</p>
           <p>در ۶ شعبه حضوری ما در تجریش، سعادت‌آباد و پونک (تهران) و گوهردشت، عظیمیه و فردیس (کرج) و همین‌طور فروشگاه آنلاین، برندهای معتبری مثل جوسرا، یوروپت، ویسکاس، فلیکس، بیفار، شایر و دکتر کلادرز را عرضه می‌کنیم و قبل از هر خرید، با کمال میل مشاوره رایگان می‌دهیم.</p>
           <ul className="features">
@@ -35,6 +38,7 @@ export function About() {
           <Link to="/shop" className="btn btn-p">مشاهده محصولات</Link>
         </Reveal>
       </div>
+      <div className="seo-wrap"><FaqList items={ABOUT_FAQ} title="سؤال‌های رایج درباره موچولو" /></div>
     </div>
   );
 }
